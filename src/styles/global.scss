@@ -1,0 +1,55 @@
+@use  './variable.scss' as *;
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("/fonts/GmarketSansMedium.woff2") format("woff2"),
+    url("/fonts/GmarketSansTTFMedium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("/fonts/GmarketSansBold.woff2") format("woff2"),
+    url("/fonts/GmarketSansTTFBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSansLight";
+  src: url("/fonts/GmarketSansLight.woff2") format("woff2"),
+    url("/fonts/GmarketSansTTFLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+html {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: $bg-color;
+  padding: 32px;
+  box-sizing: border-box;
+  font-family: "GmarketSansMedium", sans-serif;
+  -webkit-font-smoothing: antialiased; /* Mac에서 부드러운 렌더링 */
+  -moz-osx-font-smoothing: grayscale; /* Mac에서 그레이스케일 렌더링 */
+}
+body {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: $main-color;
+  border-radius: 16px;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+  &:visited {
+    color: $text-color;
+    text-decoration: none;
+
+  }
+}
+p {
+  margin: 0;
+}
