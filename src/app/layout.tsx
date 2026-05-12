@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Header from "./_layouts/header";
 
-import '../styles/global.scss'
-
+import "../styles/global.scss";
+import Header from "./_components/_layouts/Header/Header";
 
 export const metadata: Metadata = {
   title: "EPL Radar",
@@ -18,7 +17,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        {children}
+        <main>
+          <aside />
+          {children}
+          <aside />
+        </main>
       </body>
     </html>
   );

@@ -1,28 +1,29 @@
-@use './variable.scss' as *;
+@use "../../../../styles/variable.scss" as *;
 
 .header {
   width: 100%;
-  display:flex;
-  flex-direction:row;
+  height: 84px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   column-gap: 60px;
-  >div {
-display:flex;
-flex-direction:row;
-align-items: center;
-justify-content: flex-start;
-column-gap: 16px;
-    >p {
+  background-color: $bg-white;
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 16px;
+    > p {
       font-size: 32px;
       color: $text-color;
       font-weight: 600;
-
     }
   }
-  >nav {
-    display:flex;
-    flex-direction:row;
+  > nav {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     column-gap: 32px;

@@ -1,8 +1,5 @@
+import MainPage from "./main/page";
 
-import Dashboard from "./dashboard/page";
-
-export default function Home() {
-  return (
-    <Dashboard />
-  );
+export default function HomePage() {
+  return <MainPage />;
 }
