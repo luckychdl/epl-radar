@@ -1,0 +1,52 @@
+@use "../../../../../styles/variable.scss" as *;
+.leagueHeader {
+  width: 100%;
+  background-color: $bg-white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(240, 240, 240, 1);
+  box-sizing: border-box;
+  > header {
+    min-height: 112px;
+    padding: 12px 32px 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      > span {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      > p {
+        font-size: 16px;
+        color: $text-sub-color;
+      }
+    }
+  }
+  > nav {
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    > button {
+      min-height: 64px;
+      font-size: 16px;
+      color: #717171;
+      &.current {
+        border-bottom: 3px solid $text-color;
+        color: $text-color;
+        font-weight: bold;
+      }
+    }
+  }
+}

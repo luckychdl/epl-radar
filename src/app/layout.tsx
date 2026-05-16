@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "../styles/global.scss";
 import Header from "./_components/_layouts/Header/Header";
+import QueryProvider from "./_components/_commons/QueryProvider";
 
 export const metadata: Metadata = {
   title: "EPL Radar",
@@ -16,12 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>
-          <aside />
-          {children}
-          <aside />
-        </main>
+        <QueryProvider>
+          <Header />
+          <main>
+            <aside />
+            {children}
+            <aside />
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );

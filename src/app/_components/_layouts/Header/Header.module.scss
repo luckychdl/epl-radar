@@ -9,6 +9,9 @@
   justify-content: flex-start;
   column-gap: 60px;
   background-color: $bg-white;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid rgba(245, 245, 245, 1);
   > div {
     display: flex;
     flex-direction: row;
