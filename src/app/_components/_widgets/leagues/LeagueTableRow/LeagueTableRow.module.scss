@@ -1,0 +1,64 @@
+@use "../../../../../styles/variable.scss" as *;
+.leagueTableRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1/-1;
+  min-height: 36px;
+  height: 36px;
+  > span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+  }
+  .rank {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    > p {
+      height: 80%;
+      &.ucl {
+        border-left: 2px solid #2ad572;
+      }
+      &.uel {
+        border-left: 2px solid #0046a7;
+      }
+      &.uecl {
+        border-left: 2px solid #0eccf0;
+      }
+      &.relegation {
+        border-left: 2px solid #ff4646;
+      }
+    }
+    > span {
+      padding-inline-start: 24px;
+    }
+  }
+  .teamName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    > span {
+      font-size: 14px;
+    }
+  }
+  .leagueMatchResult {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .nextMatch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
