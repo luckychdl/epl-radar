@@ -1,0 +1,63 @@
+@use "../../../../../styles/variable.scss" as *;
+
+.nextMatchForm {
+  width: 100%;
+  background-color: $bg-white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(240, 240, 240, 1);
+  box-sizing: border-box;
+  padding: 0px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      min-height: 64px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    > button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    > div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      row-gap: 24px;
+
+      > p {
+        min-height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+      }
+    }
+  }
+}

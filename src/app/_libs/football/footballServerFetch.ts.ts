@@ -11,7 +11,7 @@ export async function footballServerFetch<T>(
 ): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, {
     headers: {
-      "X-Auth-Token": process.env.NEXT_PUBLIC_FOOTBALL_API_KEY!,
+      "X-Auth-Token": process.env.FOOTBALL_API_KEY!,
     },
 
     cache: options?.cache,

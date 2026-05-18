@@ -21,7 +21,7 @@ export async function GET(request: NextRequest, { params }: Props) {
     `${BASE_URL}/teams/${teamId}/matches?status=${status}&competitions=${code}&limit=${limit}`,
     {
       headers: {
-        "X-Auth-Token": process.env.NEXT_PUBLIC_FOOTBALL_API_KEY!,
+        "X-Auth-Token": process.env.FOOTBALL_API_KEY!,
       },
 
       next: {

@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./LeagueTableRow.module.scss";
 import { Table } from "@/app/_types/standings";
 import { LEAGUE_RULES } from "@/app/_constants/leagueRules";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import LeagueMatchResult from "../LeagueMatchResult/LeagueMatchResult";
 import { Match } from "@/app/_types/matches";
@@ -37,6 +37,10 @@ export default function LeagueTableRow({ data, matches, scheduled }: Props) {
     nextMatch?.homeTeam.id == data.team.id
       ? nextMatch.awayTeam.crest
       : nextMatch?.homeTeam.crest;
+  const router = useRouter();
+  const handleMoveTeamDetail = (teamId: number) => {
+    router.push(`/teams/${teamId}/${code}/overview`);
+  };
   return (
     <div key={data.team.id} className={styles.leagueTableRow}>
       <div className={styles.rank}>
@@ -45,10 +49,13 @@ export default function LeagueTableRow({ data, matches, scheduled }: Props) {
         ></p>
         <span>{data.position}</span>
       </div>
-      <div className={styles.teamName}>
+      <button
+        className={styles.teamName}
+        onClick={() => handleMoveTeamDetail(data.team.id)}
+      >
         <Image src={data.team.crest} alt="" width={18} height={18} />
-        <span>{data.team.name}</span>
-      </div>
+        <span>{data.team.shortName}</span>
+      </button>
       <span>{data.playedGames}</span>
       <span>{data.won}</span>
       <span>{data.draw}</span>

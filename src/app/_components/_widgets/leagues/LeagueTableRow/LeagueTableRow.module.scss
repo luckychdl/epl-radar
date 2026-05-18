@@ -6,6 +6,9 @@
   grid-column: 1/-1;
   min-height: 36px;
   height: 36px;
+  &:hover {
+    background-color: rgba(245, 245, 245, 1);
+  }
   > span {
     display: flex;
     flex-direction: row;
@@ -44,6 +47,12 @@
     align-items: center;
     justify-content: flex-start;
     gap: 16px;
+
+    &:hover {
+      > span {
+        text-decoration: underline;
+      }
+    }
     > span {
       font-size: 14px;
     }

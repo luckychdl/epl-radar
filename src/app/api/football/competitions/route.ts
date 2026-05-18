@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const res = await fetch("https://api.football-data.org/v4/competitions", {
     headers: {
-      "X-Auth-Token": process.env.NEXT_PUBLIC_FOOTBALL_API_KEY!,
+      "X-Auth-Token": process.env.FOOTBALL_API_KEY!,
     },
 
     next: {
