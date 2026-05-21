@@ -1,0 +1,135 @@
+.modal {
+  width: 300px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  position: relative;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 64px 1fr 32px;
+  align-items: center;
+  margin-bottom: 12px;
+
+  button {
+    border: 0;
+    background: transparent;
+    color: #8ee8c8;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  strong {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.calendar {
+  width: 100%;
+}
+
+.caption {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  margin-bottom: 20px;
+}
+
+.captionLabel {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: #eaeaea;
+  color: #000000;
+  cursor: pointer;
+  pointer-events: auto;
+  margin: 14px 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+}
+.month {
+  width: 100%;
+}
+.monthGrid {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+.weekdays,
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  padding: 10px 0;
+  text-align: center;
+  color: #7c828d;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  padding: 3px 0;
+}
+
+.dayButton {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #000000;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: #eaeaea;
+  }
+}
+
+.today .dayButton {
+  background-color: #ededed;
+}
+
+.selected .dayButton {
+  background: #000000;
+  color: #fff;
+  font-weight: 800;
+}
+
+.outside .dayButton {
+  color: #4b5563;
+}
