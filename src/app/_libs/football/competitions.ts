@@ -4,7 +4,7 @@ import { CompetitionMatchesResponse } from "@/app/_types/matches.js";
 
 export function getCompetitionsServer() {
   return footballServerFetch<CompetitionsResponse>("/competitions", {
-    revalidate: 60 * 60,
+    revalidate: 60 * 60 * 24,
   });
 }
 export function getCompetitionLiveMatches(code: string) {

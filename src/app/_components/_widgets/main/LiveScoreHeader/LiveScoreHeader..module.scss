@@ -20,6 +20,10 @@
     height: 30px;
     background-color: #eaeaea;
     border-radius: 50%;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+
     &:hover {
       background-color: #000000;
       color: $bg-white;
