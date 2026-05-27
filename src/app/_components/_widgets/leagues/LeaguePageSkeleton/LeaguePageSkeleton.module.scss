@@ -1,0 +1,162 @@
+@use "../../../../../styles/variable.scss" as *;
+.leaguePageSkeleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+.leagueHeader {
+  width: 100%;
+  background-color: $bg-white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(240, 240, 240, 1);
+  box-sizing: border-box;
+
+  > header {
+    min-height: 184px;
+    padding: 12px 16px 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+
+    .image {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+        animation: shimmer 1.4s infinite;
+      }
+    }
+    .text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      row-gap: 10px;
+      > span {
+        min-width: 200px;
+        min-height: 30px;
+        margin-bottom: 4px;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+          animation: shimmer 1.4s infinite;
+        }
+      }
+      > p {
+        min-width: 70px;
+        min-height: 20px;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+          animation: shimmer 1.2s infinite;
+        }
+      }
+    }
+  }
+}
+.leagueTable {
+  width: 100%;
+  background-color: $bg-white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 8px 0 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: 1px solid rgba(240, 240, 240, 1);
+  row-gap: 4px;
+  > div {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+    .left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      > p {
+        min-width: 32px;
+        min-height: 32px;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+          animation: shimmer 1.4s infinite;
+        }
+      }
+      > span {
+        min-width: 200px;
+        min-height: 32px;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+          animation: shimmer 1.4s infinite;
+        }
+      }
+    }
+    .right {
+      min-width: 500px;
+      min-height: 32px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+        animation: shimmer 1.4s infinite;
+      }
+    }
+  }
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

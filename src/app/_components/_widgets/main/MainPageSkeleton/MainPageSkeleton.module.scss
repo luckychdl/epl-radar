@@ -1,0 +1,64 @@
+.main {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 280px;
+  gap: 16px;
+}
+
+.todayMatches {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listCard,
+.matchCard,
+.matches {
+  padding: 16px;
+  border-radius: 16px;
+  background: #eaeaea;
+}
+
+.title,
+.listItem,
+.matchBox,
+.matchRow {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, #eaeaea, transparent);
+    animation: shimmer 1.4s infinite;
+  }
+}
+
+.title {
+  width: 120px;
+  height: 18px;
+  margin-bottom: 16px;
+}
+
+.listItem {
+  height: 42px;
+  margin-bottom: 10px;
+}
+
+.matchBox {
+  height: 84px;
+}
+
+.matchRow {
+  height: 64px;
+  margin-bottom: 10px;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

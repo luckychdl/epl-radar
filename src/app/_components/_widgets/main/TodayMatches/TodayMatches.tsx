@@ -30,7 +30,6 @@ export default function TodayMatches({ leagues }: Props) {
     });
     setRowController(temp);
   };
-  console.log(leagues, "leagues");
   return (
     <>
       {leagues.map((el) => (
@@ -40,14 +39,17 @@ export default function TodayMatches({ leagues }: Props) {
             onClick={() => handleContract(el.code)}
           >
             <div>
-              <Image
-                src={el?.matches[0]?.area.flag}
-                alt=""
-                width={20}
-                height={20}
-              />
+              {el.matches.length > 0 && (
+                <Image
+                  src={el?.matches[0]?.area.flag}
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              )}
               <span>
-                {el?.matches[0]?.area.name} - {el.name}
+                {el.matches.length > 0 && `${el?.matches[0]?.area.name} - `}
+                {el.name}
               </span>
             </div>
             {rowController?.find((row) => row.code == el.code)?.open ? (
@@ -56,14 +58,25 @@ export default function TodayMatches({ leagues }: Props) {
               <ChevronDown size={20} />
             )}
           </button>
-
-          {el.matches.map((v) => (
-            <TodayMatchRows
-              v={v}
-              key={v.id}
-              rowController={rowController?.find((row) => row.code == el.code)}
-            />
-          ))}
+          {el.matches.length > 0 ? (
+            <>
+              {el.matches.map((v) => {
+                return (
+                  <TodayMatchRows
+                    v={v}
+                    key={v.id}
+                    rowController={rowController?.find(
+                      (row) => row.code == el.code,
+                    )}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <div className={styles.noMatches}>
+              <span>No matches today</span>
+            </div>
+          )}
         </div>
       ))}
     </>

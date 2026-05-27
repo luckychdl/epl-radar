@@ -30,25 +30,23 @@ export default function TodayMatchRows({ v, rowController }: Props) {
   return (
     <>
       {rowController?.open && (
-        <>
-          <button className={styles.matchRows}>
-            <div className={styles.matchTeam}>
-              <span>{v.homeTeam.shortName}</span>
-              <Image src={v.homeTeam.crest} alt="" width={20} height={20} />
-            </div>
-            <div className={styles.matchTime}>
-              <p>{getMatchTimeLabel(v.utcDate)}</p>
-              <span>
-                {format(new Date(v.utcDate), "H:mm")}
-                <p>{format(new Date(v.utcDate), "a")}</p>
-              </span>
-            </div>
-            <div className={styles.matchTeam}>
-              <Image src={v.awayTeam.crest} alt="" width={20} height={20} />
-              <span>{v.awayTeam.shortName}</span>
-            </div>
-          </button>
-        </>
+        <button className={styles.matchRows}>
+          <div className={styles.matchTeam}>
+            <span>{v.homeTeam.shortName}</span>
+            <Image src={v.homeTeam.crest} alt="" width={20} height={20} />
+          </div>
+          <div className={styles.matchTime}>
+            <p>{getMatchTimeLabel(v.utcDate)}</p>
+            <span>
+              {format(new Date(v.utcDate), "H:mm")}
+              <p>{format(new Date(v.utcDate), "a")}</p>
+            </span>
+          </div>
+          <div className={styles.matchTeam}>
+            <Image src={v.awayTeam.crest} alt="" width={20} height={20} />
+            <span>{v.awayTeam.shortName}</span>
+          </div>
+        </button>
       )}
     </>
   );

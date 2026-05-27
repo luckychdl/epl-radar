@@ -13,13 +13,12 @@ export default async function MainPage({ searchParams }: Props) {
   const date = searchParams?.date;
   const competitionRes = await getCompetitionsServer();
   const data = await getTodayMatchesServer(date);
-  console.log(data, "leguesDATa");
   return (
     <div className={styles.main}>
       <div>
         <ListCard data={competitionRes.competitions} title={"Leagues"} />
       </div>
-      <div>
+      <div className={styles.todayMatches}>
         <MatchCard />
         <TodayMatches leagues={data.leagues} />
       </div>

@@ -2,6 +2,7 @@ import LeagueHeader from "@/app/_components/_widgets/leagues/LeagueHeader/League
 import LeagueTable from "@/app/_components/_widgets/leagues/LeagueTable/LeegueTable";
 import styles from "./leagues.module.scss";
 import { getCompetitionStandingsServer } from "@/app/_libs/football/standings";
+import LeaguePageSkeleton from "@/app/_components/_widgets/leagues/LeaguePageSkeleton/LeaguePageSkeleton";
 
 interface Props {
   params: {
@@ -15,9 +16,13 @@ export default async function LeaguesPage({ params }: Props) {
   const res = await getCompetitionStandingsServer(code);
 
   return (
-    <div className={styles.leaguePage}>
-      <LeagueHeader league={{ competition: res.competition, area: res.area }} />
-      <LeagueTable standings={res.standings[0]} code={code} />
-    </div>
+    <>
+      <div className={styles.leaguePage}>
+        <LeagueHeader
+          league={{ competition: res.competition, area: res.area }}
+        />
+        <LeagueTable standings={res.standings[0]} code={code} />
+      </div>
+    </>
   );
 }
