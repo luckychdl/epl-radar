@@ -1,27 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
-
-const BASE_URL = "https://api.football-data.org/v4";
+import { NextResponse } from "next/server";
+import { toErrorResponse } from "@/app/_libs/football/apiResponse";
+import { getTeamInfoServer } from "@/app/_libs/football/teams";
 
 interface Props {
-  params: Promise<{
-    teamId: string;
-  }>;
+  params: Promise<{ teamId: string }>;
 }
 
-export async function GET(request: NextRequest, { params }: Props) {
+export async function GET(_request: Request, { params }: Props) {
   const { teamId } = await params;
-  console.log(teamId, "teamId");
-  const res = await fetch(`${BASE_URL}/teams/${teamId}`, {
-    headers: {
-      "X-Auth-Token": process.env.FOOTBALL_API_KEY!,
-    },
 
-    next: {
-      revalidate: 60 * 10,
-    },
-  });
+  if (!/^\d+$/.test(teamId)) {
+    return NextResponse.json({ message: "Invalid teamId" }, { status: 400 });
+  }
 
-  const data = await res.json();
-
-  return NextResponse.json(data);
+  try {
+    return NextResponse.json(await getTeamInfoServer(teamId));
+  } catch (error) {
+    return toErrorResponse(error);
+  }
 }

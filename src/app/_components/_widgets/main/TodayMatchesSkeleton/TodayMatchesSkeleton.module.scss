@@ -1,0 +1,61 @@
+@use "../../../../../styles/skeleton.scss" as *;
+
+.todayMatchesSkeleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  > section {
+    @include skeleton-card(0 0 8px);
+    overflow: hidden;
+    > header {
+      width: 100%;
+      min-height: 48px;
+      box-sizing: border-box;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 12px;
+      background-color: rgba(245, 245, 245, 1);
+    }
+  }
+}
+
+.emblem {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  @include skeleton-shimmer(999px);
+}
+
+.leagueName {
+  width: 140px;
+  height: 14px;
+  @include skeleton-shimmer;
+}
+
+.row {
+  min-height: 56px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+}
+
+.team {
+  flex: 1;
+  max-width: 180px;
+  height: 20px;
+  @include skeleton-shimmer;
+}
+
+.time {
+  flex: none;
+  width: 48px;
+  height: 20px;
+  @include skeleton-shimmer;
+}

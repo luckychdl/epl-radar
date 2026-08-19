@@ -1,0 +1,86 @@
+@use "../../../../../styles/variable.scss" as *;
+
+.teamInfo {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 24px 20px;
+  background-color: $bg-white;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  > header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    > a {
+      font-size: 12px;
+      color: $text-sub-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  > dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    > div {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      column-gap: 12px;
+      font-size: 13px;
+      > dt {
+        flex: 0 0 88px;
+        color: $text-sub-color;
+      }
+      > dd {
+        margin: 0;
+        flex: 1;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.competitions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(240, 240, 240, 1);
+  > strong {
+    font-size: 13px;
+    color: $text-sub-color;
+    font-weight: normal;
+  }
+  > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    > li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 6px;
+      padding: 6px 12px;
+      box-sizing: border-box;
+      border-radius: 999px;
+      background-color: rgba(245, 245, 245, 1);
+      font-size: 12px;
+    }
+  }
+}

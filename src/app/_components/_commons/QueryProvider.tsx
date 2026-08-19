@@ -1,12 +1,15 @@
 "use client";
+
+import { useState, type ReactNode } from "react";
 import {
-  MutationCache,
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { ReactNode, useState } from "react";
-type Props = { children: ReactNode };
+
+interface Props {
+  children: ReactNode;
+}
 
 export default function QueryProvider({ children }: Props) {
   const [queryClient] = useState(
@@ -14,13 +17,7 @@ export default function QueryProvider({ children }: Props) {
       new QueryClient({
         queryCache: new QueryCache({
           onError: (error, query) => {
-            // ✅ 여기서 토스트/로그/공통 처리
-            console.log("Query error", query.queryKey, error);
-          },
-        }),
-        mutationCache: new MutationCache({
-          onError: (error, variables, context, mutation) => {
-            // console.log("Mutation error", mutation.options.mutationKey, error);
+            console.error("[query]", query.queryKey, error);
           },
         }),
         defaultOptions: {
@@ -32,6 +29,7 @@ export default function QueryProvider({ children }: Props) {
         },
       }),
   );
+
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

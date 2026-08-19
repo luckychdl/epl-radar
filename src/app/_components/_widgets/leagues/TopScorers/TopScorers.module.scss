@@ -1,0 +1,112 @@
+@use "../../../../../styles/variable.scss" as *;
+
+.topScorers {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 24px 12px;
+  background-color: $bg-white;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  > header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    column-gap: 8px;
+    > span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    > em {
+      font-size: 11px;
+      color: $text-sub-color;
+      font-style: normal;
+    }
+  }
+  > ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    > li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 12px;
+      padding: 10px 4px;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(245, 245, 245, 1);
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 12px;
+    padding: 0 4px 4px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(240, 240, 240, 1);
+    > span {
+      flex: 0 0 32px;
+      text-align: right;
+      font-size: 10px;
+      color: $text-sub-color;
+    }
+  }
+}
+
+.rank {
+  flex: 0 0 20px;
+  font-size: 12px;
+  color: $text-sub-color;
+  text-align: center;
+}
+
+.player {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+  > span {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 4px;
+    > em {
+      font-size: 11px;
+      color: $text-sub-color;
+      font-style: normal;
+    }
+    &:hover > em {
+      text-decoration: underline;
+    }
+  }
+}
+
+.goals {
+  flex: 0 0 32px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.assists {
+  flex: 0 0 32px;
+  text-align: right;
+  font-size: 13px;
+  color: $text-sub-color;
+}

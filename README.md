@@ -1,36 +1,213 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EPL Radar
 
-## Getting Started
+football-data.org **무료 플랜만으로** 만든 FotMob 스타일 축구 정보 앱.
+이 프로젝트의 주제는 기능 개수가 아니라 **분당 10회 요청 한도 안에서 다중 사용자 서비스를 성립시킨 캐시 · 요청 설계**다.
 
-First, run the development server:
+- 배포 링크: _(배포 후 추가)_
+- 데모 GIF: _(스코어 자동 갱신 / 즐겨찾기 / AI 프리뷰 스트리밍 — 녹화 후 추가)_
+
+## 기술 스택
+
+| 영역 | 선택 | 이유 |
+| --- | --- | --- |
+| 프레임워크 | Next.js 16 App Router | 서버 컴포넌트에서 API 키를 감추고, fetch 단위 ISR 캐시를 요청 예산 관리 수단으로 쓴다 |
+| 서버 상태 | React Query | 갱신 주기·초기 데이터 주입·폴링 중단 조건을 선언적으로 다룬다 |
+| UI 상태 | Zustand | 모달·즐겨찾기처럼 서버와 무관한 상태만 담당. 서버 데이터와 역할을 섞지 않는다 |
+| 스타일 | SCSS Module | 컴포넌트별 스코프. 디자인 토큰은 `src/styles/variable.scss` |
+| 그 외 | framer-motion, lucide-react, date-fns, axios, @anthropic-ai/sdk | |
+
+React Query 와 Zustand 를 함께 쓰는 이유는 역할이 겹치지 않기 때문이다.
+**서버에서 온 데이터는 React Query 가, 브라우저에만 있는 상태는 Zustand 가** 관리한다.
+
+## 로컬 실행
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| 환경변수 | 필수 | 설명 |
+| --- | --- | --- |
+| `FOOTBALL_API_KEY` | ✅ | football-data.org 토큰. **서버에서만 읽는다** |
+| `ANTHROPIC_API_KEY` | — | AI 매치 프리뷰용. 없으면 해당 섹션만 조용히 사라진다 |
+| `FOOTBALL_API_BASE_URL` | — | 기본값 `https://api.football-data.org/v4`. E2E 는 목 서버를 가리킨다 |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+뉴스 탭은 BBC Sport · The Guardian · ESPN 의 공개 RSS 를 쓴다. 키가 필요 없고 요청 한도도 없다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test          # 순수 함수 단위 테스트 (Vitest)
+npm run test:e2e  # E2E (Playwright + 목 서버, 실제 API 미사용)
+npm run analyze   # 번들 분석 (webpack 빌더 필요)
+```
 
-## Learn More
+## 아키텍처
 
-To learn more about Next.js, take a look at the following resources:
+동시 접속자가 늘어도 외부 API 호출량은 늘지 않는다. 캐시 계층이 팬아웃을 흡수한다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+브라우저 1 ┐
+브라우저 2 ┤   /api/football/*        _libs/football/*         api.football-data.org
+브라우저 3 ┼─▶ 프록시 라우트 핸들러 ─▶ footballServerFetch ─▶ ┃ 분당 10회 한도
+   ...     ┤   (키 은닉 + 입력 검증)   (ISR 60초 / 10분 / 24시간)  ┃
+브라우저 N ┘                              └── 캐시 히트 시 외부 호출 0회
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 클라이언트는 외부 API 를 직접 부르지 않는다. API 키가 번들에 들어갈 일이 없다.
+- 폴링 간격(60초)은 **서버 캐시 주기와 같게** 맞췄다. 더 자주 불러도 같은 캐시를 받으므로 낭비다.
+- 탭이 5개든 50개든 외부 호출은 캐시 주기당 1회다.
 
-## Deploy on Vercel
+### 이 설계가 실제로 도는지 보는 법 — `/budget`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+위 주장을 로그로만 확인하면 읽는 사람이 검증할 수 없다. `footballServerFetch` 에
+계측을 심고 `/budget` 화면으로 노출했다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| 지표 | 뜻 |
+| --- | --- |
+| 호출 | 앱 코드가 요청한 횟수 |
+| 외부 | 그중 실제로 football-data 까지 나간 횟수 |
+| 캐시 | `(호출 - 외부) / 호출` |
+| 최근 1분 외부 호출 | 분당 10회 한도 대비 실사용량 |
+| API 가 알려준 잔여 | 응답 헤더 `x-requests-available-minute` (제공자 기준값) |
+
+캐시 적중 판정은 응답 `Date` 헤더로 한다. Next 의 fetch 캐시는 응답을 헤더까지 그대로
+재생하므로, `Date` 가 직전과 같으면 외부로 나가지 않은 것이다. ISR 주기가 최소 60초라
+같은 경로가 1초 안에 두 번 나갈 일은 없다.
+
+실측 예 — 리그 페이지를 3회 연속 열었을 때:
+
+```
+최근 1분 외부 호출  6 / 10      API 가 알려준 잔여  5      캐시 적중률  71%
+
+경로                                          호출  외부   캐시
+/competitions/PL/matches?status=FINISHED         6     1    83%
+/competitions/PL/standings                       3     1    67%
+/competitions/PL                                 3     1    67%
+/competitions/PL/scorers?limit=<n>               3     1    67%
+```
+
+계측은 서버 프로세스 메모리에만 쌓인다. 인스턴스가 여러 개면 인스턴스별 수치이고
+재시작하면 초기화된다. 운영 지표가 아니라 설계가 의도대로 도는지 보는 진단용이다.
+
+| 계층 | 역할 |
+| --- | --- |
+| `app/_libs/football/*` | 서버 전용 fetch. `footballServerFetch` 만 사용. API 키는 여기서만 읽는다 |
+| `app/api/football/*` | 클라이언트용 프록시. 키 은닉 + 쿼리 파라미터 화이트리스트 검증 |
+| `app/_libs/_apis/*` | 클라이언트 axios + React Query. 반드시 프록시 경유 |
+| `app/_libs/_utils/*` | 순수 함수. 외부 의존 없음 (단위 테스트 대상) |
+
+## 무료 API 제약과 대응
+
+무료 플랜은 **분당 10회** 제한이 있고, **스코어가 지연**되며, **라인업 · 선수 개별 스탯을 제공하지 않는다.**
+제약을 숨기는 대신 설계의 전제로 삼았다.
+
+### 1. 분당 10회 한도 — 홈 1회 갱신당 9 → 2 요청
+
+기존에는 `SUPPORTED_LEAGUES` 8개 리그를 각각 `/competitions/{code}/matches` 로 호출했다.
+리그 목록 1회를 더해 **홈 캐시 갱신 1회당 9 요청**. 여유가 1회뿐이라 리그·팀 페이지를 여는 순간 429 가 났다.
+
+| | 이전 | 이후 |
+| --- | --- | --- |
+| 오늘 경기 | `/competitions/{code}/matches` × 8 | `/matches?dateFrom=&dateTo=&competitions=` × **1** |
+| 리그 목록 | `/competitions` × 1 (24시간 캐시) | 동일 |
+| **합계** | **9** | **2** (정상 상태에서는 캐시 히트로 분당 1) |
+
+리그별 그룹핑은 `_libs/_utils/match.ts` 의 순수 함수 `groupMatchesByLeague` 가 한다.
+**서버 호출을 줄이는 대신 계산을 코드로 옮긴 것**이 이 프로젝트의 기본 전략이다.
+
+요청 예산은 이렇게 배분했다.
+
+| 용도 | 캐시 주기 | 분당 소모 |
+| --- | --- | --- |
+| 오늘 경기 (`/matches`) | 60초 | 1 |
+| 리그 목록 | 24시간 | ≈ 0 |
+| 순위표 · 리그 경기 (리그당) | 10분 | 0.1 |
+| 팀 상세 | 10분 | 0.1 |
+| 여유분 (429 · 예외) | — | 3 이상 확보 |
+
+확인 방법: `next.config.ts` 의 `logging.fetches` 가 켜져 있어, `npm run dev` 로 띄운 뒤
+페이지를 열면 요청별 외부 fetch 와 `cache hit` / `cache skip` 이 터미널에 찍힌다.
+
+### 2. 스코어 지연 — "실시간" 이 아니라 "자동 갱신"
+
+무료 플랜의 실시간 스코어는 제공되지 않고 지연된다. 그래서 UI 어디에도 "실시간 / Live" 라고 쓰지 않고
+**"자동 갱신 · HH:mm 기준"** 으로 표기하고, 지연 안내 툴팁을 한 곳에 뒀다.
+
+폴링은 낭비 없이 돈다.
+
+- 진행 중(`IN_PLAY` / `PAUSED`) 경기가 하나라도 있을 때만 활성화된다. 없는 날은 요청이 0이다.
+- 전 경기가 종료 · 연기 · 취소면 완전히 멈춘다.
+- Page Visibility API 로 백그라운드 탭에서는 멈추고, 복귀 시 **데이터가 캐시 주기보다 오래됐을 때만** 1회 갱신한다.
+- 서버 컴포넌트가 받은 데이터를 `initialData` 로 주입해 최초 렌더에서는 추가 요청이 없다.
+- 스코어가 바뀐 행만 배경 플래시를 1회 재생한다(이전 응답과 비교하는 순수 함수 `getScoreChangedMatchIds`).
+
+_실측한 지연 폭: 경기 진행 중에 직접 호출해 측정한 뒤 여기에 기록한다._
+
+### 3. 선수 스탯 부재 — 주어진 데이터로 직접 계산한다
+
+무료 플랜에는 라인업 · 교체 · 카드 · 선수 개별 스탯이 없다. 대신 **경기 결과만으로 계산해서 만든 지표**를 쓴다.
+추가 요청은 0이다.
+
+| 지표 | 계산 방식 | 위치 |
+| --- | --- | --- |
+| 라운드별 순위 변동 | 전체 경기 결과로 라운드마다 누적 승점·득실차를 다시 정렬 | `buildPositionHistory` |
+| 팀 폼 스트릭 | 최근 결과가 이어진 횟수 (3연승 등) | `getFormStreak` |
+| 잔여 일정 난이도 | 예정 경기 상대의 현재 순위 평균을 0~1 로 정규화 | `getRemainingDifficulty` |
+
+리그별 세부 타이브레이커는 API 가 주지 않으므로 **승점 → 득실차 → 다득점 → 이름** 순으로 근사했고,
+이 근사는 단위 테스트로 경계 케이스(무승부, 미종료, 중립 조회)를 고정해 두었다.
+
+### 4. API 실측 메모 (문서에 없는 동작)
+
+- `/matches` 의 `dateTo` 는 **배타적**이다. `dateFrom` 과 같은 날짜를 주면 0건이 돌아온다.
+- `/matches` 는 기간이 **10일을 넘으면 400** 이다 (`Specified period must not exceed 10 days.`).
+- `/matches?competitions=PL,PD,...` 필터는 **공식 필터 표에 없지만 동작한다.** 적용 시 플랜 범위의
+  다른 대회(예: Copa Libertadores)가 응답에서 제외된다.
+- 한도 정보는 응답 헤더 `X-RequestCounter-Reset`(초), `x-requests-available-minute` 로 내려온다.
+
+### 5. 429 는 예외가 아니라 정상 시나리오
+
+- 429 는 `RateLimitError` 로 구분해 던지고, 헤더의 초기화 대기 시간을 로그에 남긴다.
+  **재시도 루프는 없다.** 한도 초과 상황에서 재시도는 한도를 더 태울 뿐이다.
+- 오늘 경기 조회 실패 → 빈 목록 폴백 + `ErrorNotice` 안내.
+- 순위표의 최근 폼 · 다음 경기처럼 부가 데이터 실패 → 빈 배열 폴백. 순위표 자체는 그대로 보여준다.
+
+## 문제 - 해결
+
+### 서버 컴포넌트 + localStorage 개인화의 하이드레이션 경계
+
+즐겨찾기는 localStorage 에만 있으므로 서버 렌더 시점에는 존재하지 않는다. 그대로 그리면 마크업이 갈린다.
+
+- **서버는 전체 데이터 한 벌만** 가져오고, 클라이언트가 즐겨찾기 기준으로 **정렬 · 필터만** 한다.
+  사용자마다 서버 요청이 갈라지면 캐시 적중률이 무너지고 곧바로 429 로 이어진다.
+- 하이드레이션 완료 전에는 개인화 영역을 스켈레톤으로 두고, `suppressHydrationWarning` 으로 덮지 않는다.
+- 판별은 `useSyncExternalStore` 기반 `useHasHydrated` 로 한다. 서버 스냅샷 `false`, 클라이언트 스냅샷 `true`.
+  effect 안에서 setState 하는 방식과 달리 추가 렌더가 생기지 않는다.
+- 그 결과 **즐겨찾기를 늘려도 외부 API 요청 수는 그대로**다. `my-teams` 도 즐겨찾기 수와 무관하게
+  고정 2회(과거 10일 창 + 예정 10일 창)만 호출한다.
+
+### AI 응답의 비용 · 지연 · 실패 통제
+
+- 입력은 `matchId` **하나만** 신뢰한다. 클라이언트가 보낸 텍스트를 프롬프트에 넣지 않는다.
+- 프롬프트 구성 데이터는 **이미 캐시된 URL 을 재사용**한다. AI 기능 때문에 football-data 요청이 늘지 않는다.
+- 같은 `matchId` + 같은 경기 상태면 생성 결과를 재사용한다. 상태가 바뀌면 키가 달라져 자동으로 무효화된다.
+- 목록에서 자동 호출하지 않는다. 사용자가 펼쳤을 때만 요청이 나간다.
+- 응답은 스트리밍으로 내려보내 첫 글자까지의 대기를 줄인다.
+- **실패하면 이 섹션만 조용히 사라진다.** 키가 없으면 204, 생성이 실패하면 빈 응답 → 나머지 화면은 정상.
+- 프롬프트는 `_libs/ai/prompts.ts` 에 분리하고, 데이터에 없는 사실(부상 · 이적 · 라인업 · 감독 발언)을
+  만들지 않도록 명시했다. 무료 플랜에 라인업 데이터가 없으므로 특히 중요하다.
+
+## 테스트 · 품질
+
+- **단위 테스트(Vitest)**: `_libs/_utils/*` 순수 함수. 승/무/패 판정과 순위 계산의 경계 케이스
+  (무승부, 미종료, 중립 조회, 동점 시 득실차)를 고정한다.
+- **E2E(Playwright)**: 홈 진입 → 리그 순위 → 팀 상세 + 즐겨찾기 흐름. `e2e/mock-server.mjs` 로
+  football-data 응답을 목킹하므로 **실제 한도를 쓰지 않는다.**
+- **접근성**: 모달은 포커스 트랩 + 닫을 때 트리거로 포커스 복귀 + Esc 닫기. 날짜 이동, 리그 접기/펴기,
+  즐겨찾기, 프리뷰 열기 모두 실제 버튼/링크라 키보드로 조작된다.
+- **차트 색상**: 카테고리 팔레트를 색각 이상 분리도(ΔE)까지 검증하고, 대비가 낮은 슬롯은
+  직접 라벨로 보완했다. 색만으로 시리즈를 구분하지 않는다.
+- **성능**: 홈은 섹션 단위 `Suspense` 로 쪼개 스트리밍한다. 번들은 `npm run analyze` 로 점검한다.
+
+## 확장 계획
+
+[docs/ROADMAP.md](./docs/ROADMAP.md) 참고. 아키텍처 규칙은 [CLAUDE.md](./CLAUDE.md) 에 있다.

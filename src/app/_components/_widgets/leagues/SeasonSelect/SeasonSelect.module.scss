@@ -1,0 +1,40 @@
+@use "../../../../../styles/variable.scss" as *;
+
+.seasonSelect {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+    padding: 8px 14px;
+    box-sizing: border-box;
+    border-radius: 999px;
+    background-color: $bg-white;
+    border: 1px solid rgba(240, 240, 240, 1);
+    font-size: 13px;
+    color: $text-sub-color;
+    > em {
+      font-size: 10px;
+      font-style: normal;
+      /* 흰 배경에서 $accent-color 는 대비가 너무 낮다. */
+      color: #00794c;
+    }
+    &:hover {
+      border-color: rgba(210, 210, 210, 1);
+    }
+  }
+  > a.current {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $bg-white;
+    > em {
+      color: $accent-color;
+    }
+  }
+}

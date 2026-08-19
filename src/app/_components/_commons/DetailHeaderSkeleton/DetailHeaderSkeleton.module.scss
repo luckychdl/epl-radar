@@ -1,0 +1,68 @@
+@use "../../../../styles/skeleton.scss" as *;
+
+/* LeagueHeader / TeamDetailHeader 와 같은 치수. 로딩이 끝나도 높이가 그대로다. */
+.detailHeaderSkeleton {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  > header {
+    min-height: 112px;
+    padding: 12px 32px 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    > div {
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 8px;
+    }
+  }
+  > nav {
+    min-height: 64px;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+.crest {
+  flex: none;
+  width: 100px;
+  height: 100px;
+  @include skeleton-shimmer(999px);
+}
+
+.name {
+  width: 220px;
+  height: 26px;
+  @include skeleton-shimmer;
+}
+
+.area {
+  width: 90px;
+  height: 18px;
+  @include skeleton-shimmer;
+}
+
+.favorite {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  @include skeleton-shimmer;
+}
+
+.tab {
+  width: 72px;
+  height: 18px;
+  @include skeleton-shimmer;
+}

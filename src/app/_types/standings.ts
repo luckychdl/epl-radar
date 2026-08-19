@@ -1,53 +1,37 @@
-export interface Standing {
-  group: null;
-  stage: string;
-  table: Table[];
-  type: string;
-}
-export interface Team {
-  id: number;
-  name: string;
-  shortName: string;
-  tla: string;
-  crest: string;
-}
-export interface Table {
-  draw: number;
-  form: null;
-  goalDifference: number;
-  goalsAgainst: number;
-  goalsFor: number;
-  lost: number;
-  playedGames: number;
-  points: number;
+import { Area, CompetitionSummary, TeamSummary } from "./common";
+
+export interface TableRow {
   position: number;
-  team: Team;
+  team: TeamSummary;
+  playedGames: number;
+  form: string | null;
   won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
 }
-export interface Area {
-  code: string;
-  flag: string;
-  id: number;
-  name: string;
-}
-export interface Competition {
-  code: string;
-  emblem: string;
-  id: number;
-  name: string;
+
+export interface Standing {
+  stage: string;
   type: string;
+  group: string | null;
+  table: TableRow[];
 }
+
 export interface Season {
-  currentMatchday: number;
-  endDate: string;
   id: number;
   startDate: string;
-  winner: null;
+  endDate: string;
+  currentMatchday: number;
+  winner: TeamSummary | null;
 }
 
 export interface CompetitionStandingsResponse {
   area: Area;
-  competition: Competition;
+  competition: CompetitionSummary;
   season: Season;
   standings: Standing[];
 }

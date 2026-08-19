@@ -1,35 +1,29 @@
-"use client";
-import { Team } from "@/app/_types/standings";
-import { Match } from "@/app/_types/teams";
-import styles from "./LeagueMatchResult.module.scss";
+import { getMatchOutcome } from "@/app/_libs/_utils/match";
+import { Match } from "@/app/_types/matches";
 import LeagueMatchTooltip from "../LeagueMatchTooltip/LeagueMatchTooltip";
+import styles from "./LeagueMatchResult.module.scss";
+
+const OUTCOME_STYLE = {
+  W: styles.winner,
+  D: styles.draw,
+  L: styles.loser,
+} as const;
+
 interface Props {
   match: Match;
-  team: Team;
+  teamId: number;
 }
-export default function LeagueMatchResult({ match, team }: Props) {
-  const isHome = team.id == match.homeTeam.id;
-  const isAway = team.id == match.awayTeam.id;
-  const winner =
-    (isHome && match.score.winner == "HOME_TEAM") ||
-    (isAway && match.score.winner == "AWAY_TEAM")
-      ? "W"
-      : (isHome && match.score.winner == "AWAY_TEAM") ||
-          (isAway && match.score.winner == "HOME_TEAM")
-        ? "L"
-        : match.score.winner == "DRAW"
-          ? "D"
-          : null;
+
+export default function LeagueMatchResult({ match, teamId }: Props) {
+  const outcome = getMatchOutcome(match, teamId);
 
   return (
-    <>
-      <button
-        className={`${styles.leagueMatchResultRow} ${winner == "W" ? styles.winner : undefined} ${winner == "D" ? styles.draw : undefined} ${winner == "L" ? styles.loser : undefined}`}
-      >
-        <LeagueMatchTooltip matchInfo={match}>
-          <span className={styles.badge}>{winner}</span>
-        </LeagueMatchTooltip>
-      </button>
-    </>
+    <div
+      className={`${styles.leagueMatchResultRow} ${outcome ? OUTCOME_STYLE[outcome] : ""}`}
+    >
+      <LeagueMatchTooltip matchInfo={match}>
+        <span className={styles.badge}>{outcome}</span>
+      </LeagueMatchTooltip>
+    </div>
   );
 }

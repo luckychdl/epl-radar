@@ -1,17 +1,20 @@
-import axiosInstance from "../../_uitils/axiosInstance";
 import { TeamMatchesResponse } from "@/app/_types/teams";
+import axiosInstance from "../../_utils/axiosInstance";
 
-export async function getTeamRecentMatches(teamId: number, code: string) {
-  const res = await axiosInstance.get<TeamMatchesResponse>(
-    `/teams/${teamId}/matches?status=FINISHED&competitions=${code}&limit=5`,
-  );
+const RECENT_MATCH_LIMIT = 5;
 
-  return { ...res.data };
+function getTeamMatches(teamId: number, code: string, status: string) {
+  return axiosInstance
+    .get<TeamMatchesResponse>(`/teams/${teamId}/matches`, {
+      params: { status, competitions: code, limit: RECENT_MATCH_LIMIT },
+    })
+    .then((res) => res.data);
 }
-export async function getTeamScheduledMatches(teamId: number, code: string) {
-  const res = await axiosInstance.get<TeamMatchesResponse>(
-    `/teams/${teamId}/matches?status=SCHEDULED&competitions=${code}&limit=5`,
-  );
 
-  return { ...res.data };
+export function getTeamRecentMatches(teamId: number, code: string) {
+  return getTeamMatches(teamId, code, "FINISHED");
+}
+
+export function getTeamScheduledMatches(teamId: number, code: string) {
+  return getTeamMatches(teamId, code, "SCHEDULED");
 }

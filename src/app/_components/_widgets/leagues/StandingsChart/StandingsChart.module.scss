@@ -1,0 +1,171 @@
+@use "../../../../../styles/variable.scss" as *;
+
+/*
+ * 검증된 카테고리 팔레트 slot 1~4 (light). 라인 차트는 adjacent pairlist 기준으로
+ * CVD ΔE 9.1 / normal ΔE 22.9 로 통과한다. 대비 WARN 은 직접 라벨로 완화한다.
+ * 앱 자체가 라이트 전용이므로 다크 스텝은 두지 않는다.
+ */
+.standingsChart {
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --chart-grid: rgba(11, 11, 11, 0.1);
+  --chart-ink: #0b0b0b;
+  --chart-ink-muted: #52514e;
+
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 24px 20px;
+  background-color: $bg-white;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  > header {
+    margin-bottom: 8px;
+    > h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--chart-ink);
+    }
+    > p {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--chart-ink-muted);
+    }
+  }
+}
+
+.empty {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 13px;
+  color: $text-sub-color;
+}
+
+.legend {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 6px;
+  > li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+    font-size: 12px;
+    color: var(--chart-ink-muted);
+    > span {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+  }
+}
+
+/* CSS Modules 는 순수 셀렉터를 요구하므로 로컬 클래스 안에 둔다. */
+.standingsChart {
+  [data-series="1"] {
+    --series-color: var(--series-1);
+  }
+  [data-series="2"] {
+    --series-color: var(--series-2);
+  }
+  [data-series="3"] {
+    --series-color: var(--series-3);
+  }
+  [data-series="4"] {
+    --series-color: var(--series-4);
+  }
+}
+
+.legend > li > span,
+.tooltip i {
+  background-color: var(--series-color);
+}
+
+.plot {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.axisLabel {
+  fill: var(--chart-ink-muted);
+  font-size: 10px;
+}
+
+.crosshair {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.line {
+  fill: none;
+  stroke: var(--series-color);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.marker {
+  fill: var(--series-color);
+  stroke: $bg-white;
+  stroke-width: 2;
+}
+
+.directLabel {
+  fill: var(--chart-ink);
+  font-size: 11px;
+}
+
+.hitArea {
+  fill: transparent;
+}
+
+.tooltip {
+  position: absolute;
+  right: 24px;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(230, 230, 230, 1);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+  font-size: 11px;
+  color: var(--chart-ink);
+  > strong {
+    font-size: 11px;
+    color: var(--chart-ink-muted);
+  }
+  > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+    > i {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+    > em {
+      margin-left: auto;
+      font-style: normal;
+      color: var(--chart-ink-muted);
+    }
+  }
+}

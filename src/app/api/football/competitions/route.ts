@@ -1,25 +1,11 @@
 import { NextResponse } from "next/server";
+import { toErrorResponse } from "@/app/_libs/football/apiResponse";
+import { getCompetitionsServer } from "@/app/_libs/football/competitions";
 
 export async function GET() {
-  const res = await fetch("https://api.football-data.org/v4/competitions", {
-    headers: {
-      "X-Auth-Token": process.env.FOOTBALL_API_KEY!,
-    },
-
-    next: {
-      revalidate: 60 * 60,
-    },
-  });
-
-  if (!res.ok) {
-    return NextResponse.json(
-      { message: "Football API Error" },
-
-      { status: res.status },
-    );
+  try {
+    return NextResponse.json(await getCompetitionsServer());
+  } catch (error) {
+    return toErrorResponse(error);
   }
-
-  const data = await res.json();
-
-  return NextResponse.json(data);
 }

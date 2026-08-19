@@ -1,32 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DayPicker } from "react-day-picker";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import styles from "./CalendarModal.module.scss";
-import { useRouter, useSearchParams } from "next/navigation";
-import { format, parse } from "date-fns";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSelectedDate } from "@/app/_hooks/useSelectedDate";
 import { useModalStore } from "@/app/_stores/useModalStore";
+import styles from "./CalendarModal.module.scss";
 
 export default function CalendarModal() {
-  const router = useRouter();
-  const searchparams = useSearchParams();
-  const date = searchparams.get("date");
-  const { closeModal } = useModalStore();
-  const [month, setMonth] = useState(new Date());
+  const { selectedDate, setSelectedDate } = useSelectedDate();
+  const closeModal = useModalStore((state) => state.closeModal);
+  const [month, setMonth] = useState(selectedDate);
+
   const handleDaySelected = (day?: Date) => {
     if (!day) return;
 
-    router.push(`?date=${format(day, "yyyyMMdd")}`);
+    setSelectedDate(day);
     closeModal();
   };
-  const selected = date ? parse(date, "yyyyMMdd", new Date()) : new Date();
 
   return (
     <div className={styles.modal}>
       <DayPicker
         mode="single"
-        selected={selected}
+        selected={selectedDate}
         onSelect={handleDaySelected}
         month={month}
         onMonthChange={setMonth}

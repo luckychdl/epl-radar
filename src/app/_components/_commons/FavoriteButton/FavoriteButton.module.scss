@@ -1,0 +1,23 @@
+@use "../../../../styles/variable.scss" as *;
+
+.favoriteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: $text-sub-color;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+  &:hover {
+    background-color: rgba(240, 240, 240, 1);
+  }
+  &.active {
+    color: #f5a623;
+    > svg {
+      fill: currentColor;
+    }
+  }
+}

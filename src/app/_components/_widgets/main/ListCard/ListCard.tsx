@@ -1,44 +1,40 @@
-"use client";
 import Image from "next/image";
-import styles from "./ListCard.module.scss";
+import Link from "next/link";
+import { SUPPORTED_LEAGUES } from "@/app/_constants/leagues";
 import { Competition } from "@/app/_types/competitions";
-import { useRouter } from "next/navigation";
+import styles from "./ListCard.module.scss";
+
+const LEAGUE_ORDER = new Map<string, number>(
+  SUPPORTED_LEAGUES.map((league, index) => [league.code, index]),
+);
+
 interface Props {
   data: Competition[];
   title: string;
 }
+
 export default function ListCard({ data, title }: Props) {
-  const router = useRouter();
-  const handleLeagues = (el: Competition) => {
-    router.push(`/leagues/${el.id}/${el.code}/overview`);
-  };
-  const filterData = [...data].filter(
-    (el) =>
-      el.code === "PL" ||
-      el.code === "CL" ||
-      el.code === "FL1" ||
-      el.code === "BL1" ||
-      el.code === "SA" ||
-      el.code === "PD" ||
-      el.code === "WC" ||
-      el.code === "EC",
-  );
+  const competitions = data
+    .filter((competition) => LEAGUE_ORDER.has(competition.code))
+    .sort(
+      (a, b) =>
+        (LEAGUE_ORDER.get(a.code) ?? 0) - (LEAGUE_ORDER.get(b.code) ?? 0),
+    );
 
   return (
-    <div className={styles.listCard}>
+    <nav className={styles.listCard}>
       <h4>{title}</h4>
-      {filterData.map((el: Competition) => (
-        <button key={el.id} onClick={() => handleLeagues(el)}>
-          <Image
-            src={el.emblem}
-            alt=""
-            width={24}
-            height={24}
-            objectFit="cover"
-          />
-          <p>{el.name}</p>
-        </button>
+      {competitions.map((competition) => (
+        <Link
+          key={competition.id}
+          href={`/leagues/${competition.id}/${competition.code}/overview`}
+        >
+          {competition.emblem && (
+            <Image src={competition.emblem} alt="" width={24} height={24} />
+          )}
+          <p>{competition.name}</p>
+        </Link>
       ))}
-    </div>
+    </nav>
   );
 }

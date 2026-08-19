@@ -1,21 +1,21 @@
 import { ReactNode } from "react";
-import styles from "./LeagueMatchTooltip.module.scss";
-import { Match } from "@/app/_types/teams";
 import { format } from "date-fns";
+import { Match } from "@/app/_types/matches";
+import styles from "./LeagueMatchTooltip.module.scss";
 
 interface Props {
   children: ReactNode;
   matchInfo: Match;
 }
+
 export default function LeagueMatchTooltip({ children, matchInfo }: Props) {
+  const { homeTeam, awayTeam, score, utcDate } = matchInfo;
+
   return (
     <div className={styles.tooltipWrap}>
-      {/* <span className={styles.badge}>UCL</span> */}
       {children}
       <div className={styles.tooltip}>
-        {format(matchInfo.utcDate, "MMM d") + ":"} {matchInfo.homeTeam.name}{" "}
-        {matchInfo.score.fullTime.home} {" - "} {matchInfo.score.fullTime.away}{" "}
-        {matchInfo.awayTeam.name}
+        {`${format(new Date(utcDate), "MMM d")}: ${homeTeam.name} ${score.fullTime.home ?? "-"} - ${score.fullTime.away ?? "-"} ${awayTeam.name}`}
       </div>
     </div>
   );

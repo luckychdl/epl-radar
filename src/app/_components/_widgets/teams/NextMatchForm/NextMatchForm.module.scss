@@ -28,7 +28,7 @@
       font-size: 16px;
       font-weight: bold;
     }
-    > button {
+    > .competition {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -38,6 +38,14 @@
         text-decoration: underline;
       }
     }
+  }
+  .empty {
+    width: 100%;
+    padding: 24px 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    color: $text-sub-color;
   }
   .content {
     width: 100%;

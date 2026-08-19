@@ -1,0 +1,92 @@
+@use "../../../../../styles/skeleton.scss" as *;
+
+.teamPageSkeleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 16px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* TeamDetail.module.scss 의 matchSection 과 같은 2열 그리드 */
+.matchSection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 16px;
+}
+
+.card {
+  @include skeleton-card(16px 24px 20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.blockTitle {
+  width: 120px;
+  height: 20px;
+  @include skeleton-shimmer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 8px;
+}
+
+.cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+
+.label {
+  width: 56px;
+  height: 14px;
+  @include skeleton-shimmer;
+}
+
+.crest {
+  width: 32px;
+  height: 32px;
+  @include skeleton-shimmer(999px);
+}
+
+.meter {
+  width: 100%;
+  height: 8px;
+  @include skeleton-shimmer(999px);
+}
+
+.caption {
+  width: 220px;
+  height: 12px;
+  @include skeleton-shimmer;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.infoLabel {
+  flex: none;
+  width: 88px;
+  height: 14px;
+  @include skeleton-shimmer;
+}
+
+.infoValue {
+  width: 180px;
+  height: 14px;
+  @include skeleton-shimmer;
+}

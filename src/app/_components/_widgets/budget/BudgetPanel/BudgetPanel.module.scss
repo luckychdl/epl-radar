@@ -1,0 +1,117 @@
+@use "../../../../../styles/variable.scss" as *;
+
+.budgetPanel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 24px;
+  background-color: $bg-white;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.headline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background-color: rgba(249, 249, 249, 1);
+    > dt {
+      font-size: 11px;
+      color: $text-sub-color;
+    }
+    > dd {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      column-gap: 4px;
+      font-size: 24px;
+      font-weight: bold;
+      > em {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        color: $text-sub-color;
+      }
+    }
+  }
+}
+
+.meter {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background-color: rgba(232, 232, 232, 1);
+  overflow: hidden;
+  > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background-color: #00794c;
+  }
+}
+
+.overBar {
+  background-color: #c0392b !important;
+}
+
+.over {
+  color: #c0392b;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  th,
+  td {
+    padding: 10px 8px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(245, 245, 245, 1);
+    text-align: right;
+    font-weight: normal;
+  }
+  thead th {
+    color: $text-sub-color;
+    font-size: 11px;
+  }
+  th:first-child,
+  tbody th {
+    text-align: left;
+    word-break: break-all;
+  }
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.empty {
+  padding: 24px 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 13px;
+  color: $text-sub-color;
+}
+
+.notice {
+  font-size: 11px;
+  line-height: 1.7;
+  color: $text-sub-color;
+  > code {
+    padding: 1px 4px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: rgba(245, 245, 245, 1);
+  }
+}

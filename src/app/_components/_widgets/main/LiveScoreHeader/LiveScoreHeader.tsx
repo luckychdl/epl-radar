@@ -1,54 +1,45 @@
 "use client";
+
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
-import styles from "./LiveScoreHeader..module.scss";
+import { addDays, format, isToday, isTomorrow, isYesterday } from "date-fns";
+import { useSelectedDate } from "@/app/_hooks/useSelectedDate";
 import { useModalStore } from "@/app/_stores/useModalStore";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  format,
-  parse,
-  isToday,
-  isTomorrow,
-  isYesterday,
-  addDays,
-} from "date-fns";
+import styles from "./LiveScoreHeader.module.scss";
+
+function getDisplayDate(date: Date) {
+  if (isToday(date)) return "Today";
+  if (isYesterday(date)) return "Yesterday";
+  if (isTomorrow(date)) return "Tomorrow";
+
+  return format(date, "EEEE, MMMM d");
+}
+
 export default function LiveScoreHeader() {
-  const { openModal } = useModalStore();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const dateParams = searchParams.get("date");
-  const currentDate = dateParams
-    ? parse(dateParams, "yyyyMMdd", new Date())
-    : new Date();
-  function getDisplayDate(date: Date) {
-    if (isToday(date)) {
-      return "Today";
-    }
+  const openModal = useModalStore((state) => state.openModal);
+  const { selectedDate, setSelectedDate } = useSelectedDate();
 
-    if (isYesterday(date)) {
-      return "Yesterday";
-    }
+  const moveDate = (amount: number) => setSelectedDate(addDays(selectedDate, amount));
 
-    if (isTomorrow(date)) {
-      return "Tomorrow";
-    }
-
-    return format(date, "EEEE, MMMM d");
-  }
-  const moveDate = (amount: number) => {
-    const nextDate = addDays(currentDate, amount);
-
-    router.push(`?date=${format(nextDate, "yyyyMMdd")}`);
-  };
   return (
     <header className={styles.liveScoreHeader}>
-      <button className={styles.arrow} onClick={() => moveDate(-1)}>
+      <button
+        type="button"
+        className={styles.arrow}
+        onClick={() => moveDate(-1)}
+        aria-label="이전 날짜"
+      >
         <ChevronLeft width={20} />
       </button>
-      <button onClick={() => openModal("calendar", null)}>
-        <span>{getDisplayDate(currentDate)}</span>
+      <button type="button" onClick={() => openModal("calendar")}>
+        <span>{getDisplayDate(selectedDate)}</span>
         <CalendarDays width={20} />
       </button>
-      <button className={styles.arrow} onClick={() => moveDate(1)}>
+      <button
+        type="button"
+        className={styles.arrow}
+        onClick={() => moveDate(1)}
+        aria-label="다음 날짜"
+      >
         <ChevronRight width={20} />
       </button>
     </header>
