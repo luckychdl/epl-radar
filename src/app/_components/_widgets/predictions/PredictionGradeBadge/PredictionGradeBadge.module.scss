@@ -1,0 +1,25 @@
+.predictionGradeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.exact {
+  background-color: rgba(0, 152, 95, 0.12);
+  color: #00985f;
+}
+
+.outcome {
+  background-color: rgba(55, 0, 60, 0.08);
+  color: #37003c;
+}
+
+.miss {
+  background-color: rgba(240, 240, 240, 1);
+  color: #9f9f9f;
+}

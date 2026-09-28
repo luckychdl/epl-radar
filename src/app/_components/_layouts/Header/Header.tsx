@@ -17,6 +17,7 @@ export default function Header() {
       <nav>
         <Link href="/">Home</Link>
         <Link href="/my-teams">My Teams</Link>
+        <Link href="/predictions">Predictions</Link>
         <Link href="/news">News</Link>
         <Link href="/budget">Budget</Link>
       </nav>

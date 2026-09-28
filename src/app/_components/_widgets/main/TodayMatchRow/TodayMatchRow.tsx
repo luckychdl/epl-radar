@@ -5,6 +5,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import MatchPreview from "@/app/_components/_widgets/matches/MatchPreview/MatchPreview";
+import MatchPrediction from "@/app/_components/_widgets/predictions/MatchPrediction/MatchPrediction";
 import {
   getMatchStatusLabel,
   isLiveMatch,
@@ -80,6 +81,7 @@ export default function TodayMatchRow({ match, isScoreChanged }: Props) {
 
       {isExpanded && (
         <div className={styles.expanded}>
+          <MatchPrediction match={match} />
           <MatchPreview matchId={match.id} />
         </div>
       )}

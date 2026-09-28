@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { format } from "date-fns";
 import MatchPreview from "@/app/_components/_widgets/matches/MatchPreview/MatchPreview";
+import MatchPrediction from "@/app/_components/_widgets/predictions/MatchPrediction/MatchPrediction";
 import { getNextMatchOfTeam } from "@/app/_libs/_utils/match";
 import { Match } from "@/app/_types/matches";
 import styles from "./NextMatchForm.module.scss";
@@ -63,6 +64,7 @@ export default function NextMatchForm({ scheduled, teamId }: Props) {
           <p>{opponent.shortName}</p>
         </div>
       </div>
+      <MatchPrediction match={nextMatch} />
       <MatchPreview matchId={nextMatch.id} />
     </div>
   );

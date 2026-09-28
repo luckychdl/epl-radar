@@ -1,0 +1,48 @@
+@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/skeleton.scss" as *;
+
+.summary {
+  display: block;
+  height: 164px;
+  @include skeleton-shimmer(16px);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  > h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+.dayCard {
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-white;
+  border: 1px solid rgba(240, 240, 240, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dayHeader {
+  display: block;
+  height: 48px;
+  @include skeleton-shimmer(0);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.row {
+  display: block;
+  height: 40px;
+  margin: 8px 16px;
+  @include skeleton-shimmer(8px);
+}
+
+.history {
+  display: block;
+  height: 72px;
+  @include skeleton-shimmer(16px);
+}
