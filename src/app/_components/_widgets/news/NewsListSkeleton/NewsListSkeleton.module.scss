@@ -1,3 +1,4 @@
+@use "../../../../../styles/variable.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .newsListSkeleton {
@@ -7,7 +8,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
+  row-gap: 8px;
   > li {
     @include skeleton-card(16px 20px);
     display: flex;
@@ -21,7 +22,7 @@
   flex: none;
   width: 120px;
   height: 68px;
-  @include skeleton-shimmer(10px);
+  @include skeleton-shimmer($radius-control);
 }
 
 .body {
@@ -53,8 +54,8 @@
 
 .source {
   width: 72px;
-  height: 16px;
-  @include skeleton-shimmer(999px);
+  height: 18px;
+  @include skeleton-shimmer($radius-pill);
 }
 
 .time {

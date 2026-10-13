@@ -1,32 +1,25 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 
 .teamMatchList {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 16px 24px 20px;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  @include panel(20px 20px 8px);
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 24px;
   > section {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap: 4px;
     > h3 {
       display: flex;
       flex-direction: row;
       align-items: baseline;
       column-gap: 8px;
-      font-size: 16px;
-      font-weight: bold;
+      @include panel-title;
       > em {
         font-size: 12px;
-        color: $text-sub-color;
+        color: $muted;
         font-style: normal;
-        font-weight: normal;
+        font-weight: 400;
       }
     }
     > ul {
@@ -36,13 +29,12 @@
       display: flex;
       flex-direction: column;
       > li {
+        min-height: 48px;
         display: flex;
         flex-direction: row;
         align-items: center;
         column-gap: 12px;
-        padding: 10px 4px;
-        box-sizing: border-box;
-        border-bottom: 1px solid rgba(245, 245, 245, 1);
+        border-bottom: 1px solid $line;
         &:last-child {
           border-bottom: none;
         }
@@ -54,13 +46,14 @@
 .date {
   flex: 0 0 52px;
   font-size: 12px;
-  color: $text-sub-color;
+  font-variant-numeric: tabular-nums;
+  color: $muted;
 }
 
 .venue {
   flex: 0 0 32px;
-  font-size: 11px;
-  color: $text-sub-color;
+  font-size: 12px;
+  color: $muted;
 }
 
 .opponent {
@@ -69,35 +62,40 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 8px;
+  column-gap: 10px;
+  > img {
+    flex: none;
+    object-fit: contain;
+  }
   > span {
-    font-size: 13px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    @include truncate;
   }
 }
 
 .score {
   flex: 0 0 56px;
   text-align: right;
-  font-size: 13px;
-  font-weight: bold;
+  @include numeric;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .kickOff {
   flex: 0 0 56px;
   text-align: right;
   font-size: 12px;
-  color: $text-sub-color;
+  font-variant-numeric: tabular-nums;
+  color: $muted;
 }
 
 .win {
-  color: #00794c;
+  color: $win;
 }
 .draw {
-  color: $text-sub-color;
+  color: $draw;
 }
 .lose {
-  color: #c0392b;
+  color: $loss;
 }

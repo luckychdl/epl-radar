@@ -1,32 +1,14 @@
+@use "../../../../styles/mixins.scss" as *;
+
 .modal {
-  width: 300px;
-  padding: 16px;
-  border-radius: 18px;
-  background: #ffffff;
-  color: #000000;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
   position: relative;
-}
-
-.header {
-  display: grid;
-  grid-template-columns: 64px 1fr 32px;
-  align-items: center;
-  margin-bottom: 12px;
-
-  button {
-    border: 0;
-    background: transparent;
-    color: #8ee8c8;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  strong {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-  }
+  width: 320px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 20px;
+  background: $surface;
+  color: $ink;
+  box-shadow: 0 24px 64px rgba(11, 16, 32, 0.28);
 }
 
 .calendar {
@@ -39,7 +21,7 @@
   justify-content: center;
   align-items: center;
   height: 36px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .captionLabel {
@@ -49,46 +31,39 @@
 
 .nav {
   position: absolute;
-  inset: 0;
+  inset: 16px 16px auto;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
 }
 
 .navButton {
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 999px;
-  background: #eaeaea;
-  color: #000000;
-  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-control;
+  color: $ink-soft;
   pointer-events: auto;
-  margin: 14px 20px;
-  z-index: 2;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-
+  transition: background-color 0.15s;
   &:hover {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: $sunken;
   }
 }
+
 .month {
   width: 100%;
 }
+
 .monthGrid {
   width: 100%;
-
   border-collapse: collapse;
-
   table-layout: fixed;
 }
+
 .weekdays,
 .week {
   display: grid;
@@ -96,45 +71,45 @@
 }
 
 .weekday {
-  padding: 10px 0;
+  padding: 8px 0;
   text-align: center;
-  color: #7c828d;
+  color: $muted;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .day {
   display: flex;
   justify-content: center;
-  padding: 3px 0;
+  padding: 2px 0;
 }
 
 .dayButton {
   width: 38px;
   height: 38px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: #000000;
+  border-radius: $radius-control;
+  color: $ink;
   font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s;
   &:hover {
-    background: #eaeaea;
+    background: $sunken;
   }
 }
 
 .today .dayButton {
-  background-color: #ededed;
+  color: $accent;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px $accent;
 }
 
 .selected .dayButton {
-  background: #000000;
-  color: #fff;
-  font-weight: 800;
+  background: $ink;
+  color: $surface;
+  font-weight: 700;
+  box-shadow: none;
 }
 
 .outside .dayButton {
-  color: #4b5563;
+  color: $faint;
 }

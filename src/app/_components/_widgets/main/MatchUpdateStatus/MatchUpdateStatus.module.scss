@@ -1,23 +1,25 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 
 .matchUpdateStatus {
   width: 100%;
+  min-height: 28px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  padding: 8px 4px 0;
-  box-sizing: border-box;
+  padding: 0 4px;
   > span {
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 4px;
-    font-size: 11px;
-    color: $text-sub-color;
+    column-gap: 5px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: $muted;
   }
   .active {
-    color: #00985f;
+    color: $win;
+    font-weight: 600;
   }
   .notice {
     position: relative;
@@ -26,12 +28,13 @@
       position: absolute;
       right: 0;
       bottom: 100%;
+      z-index: 10;
       margin-bottom: 6px;
       padding: 6px 10px;
       border-radius: 8px;
-      background-color: rgba(9, 11, 27, 0.92);
-      color: $bg-white;
-      font-size: 11px;
+      background-color: $ink;
+      color: $surface;
+      font-size: 12px;
       font-style: normal;
       white-space: nowrap;
       opacity: 0;

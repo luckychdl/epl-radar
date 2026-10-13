@@ -1,26 +1,23 @@
-import Image from "next/image";
 import Link from "next/link";
+import HeaderNav from "../HeaderNav/HeaderNav";
 import styles from "./Header.module.scss";
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Link href="/" aria-label="EPL RADAR 홈">
-        <Image
-          src="/symbols/logo.png"
-          alt="EPL RADAR"
-          width={120}
-          height={80}
-          priority
-        />
-      </Link>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/my-teams">My Teams</Link>
-        <Link href="/predictions">Predictions</Link>
-        <Link href="/news">News</Link>
-        <Link href="/budget">Budget</Link>
-      </nav>
+      <div>
+        <Link href="/" className={styles.wordmark} aria-label="EPL RADAR 홈">
+          <svg viewBox="0 0 24 24" width={22} height={22} aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 12 19 5" />
+          </svg>
+          <span>
+            EPL<em>Radar</em>
+          </span>
+        </Link>
+        <HeaderNav />
+      </div>
     </header>
   );
 }

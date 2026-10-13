@@ -1,4 +1,4 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .predictionHistory {
@@ -11,7 +11,7 @@
 }
 
 .row {
-  @include skeleton-card(12px 20px);
+  @include panel(12px 20px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
@@ -30,7 +30,8 @@
   > em {
     font-size: 11px;
     font-style: normal;
-    color: $text-sub-color;
+    font-variant-numeric: tabular-nums;
+    color: $muted;
   }
 }
 
@@ -46,19 +47,20 @@
     column-gap: 6px;
     min-width: 0;
     font-size: 13px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-weight: 500;
+    @include truncate;
     &:first-child {
       justify-content: flex-end;
     }
   }
   > strong {
-    font-size: 14px;
+    @include numeric;
+    font-size: 15px;
     &.pending {
+      font-family: $font-body;
       font-size: 12px;
-      font-weight: normal;
-      color: $text-sub-color;
+      font-weight: 400;
+      color: $muted;
     }
   }
 }
@@ -75,7 +77,8 @@
   align-items: center;
   column-gap: 8px;
   > strong {
-    font-size: 14px;
+    @include numeric;
+    font-size: 15px;
   }
 }
 
@@ -86,37 +89,37 @@
   align-items: center;
   column-gap: 2px;
   font-size: 11px;
-  font-weight: bold;
-  color: $text-sub-color;
+  font-weight: 700;
+  color: $muted;
 }
 
 .none {
   font-size: 12px;
-  color: $text-sub-color;
+  color: $muted;
 }
 
 .empty {
+  @include panel(40px 24px);
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 8px;
-  padding: 40px 24px;
-  box-sizing: border-box;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
   text-align: center;
   > p {
     font-size: 13px;
-    color: $text-sub-color;
+    color: $muted;
   }
   a {
-    text-decoration: underline;
+    color: $accent;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 /* 실제 행(카드 + 두 줄)과 같은 높이로 맞춘다. */
 .skeleton {
   height: 72px;
-  @include skeleton-shimmer(16px);
+  @include skeleton-shimmer($radius-panel);
 }

@@ -1,70 +1,77 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 
 .nextMatchForm {
-  width: 100%;
-  background-color: $bg-white;
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(240, 240, 240, 1);
-  box-sizing: border-box;
-  padding: 0px 24px 16px;
+  @include panel(20px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: 8px;
+  gap: 16px;
   .header {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    column-gap: 12px;
     > span {
-      min-height: 64px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: 16px;
-      font-weight: bold;
+      @include panel-title;
     }
     > .competition {
+      min-width: 0;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: flex-start;
       gap: 8px;
-      &:hover {
-        text-decoration: underline;
+      font-size: 12px;
+      color: $muted;
+      > p {
+        @include truncate;
+      }
+      > img {
+        flex: none;
+        object-fit: contain;
       }
     }
   }
   .empty {
-    width: 100%;
-    padding: 24px 0;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 14px;
-    color: $text-sub-color;
+    @include empty-text;
   }
   .content {
     width: 100%;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: center;
+    column-gap: 12px;
+    padding: 4px 0 8px;
     > div {
-      width: 100%;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      row-gap: 24px;
-
+      row-gap: 8px;
+      > img {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+      }
       > p {
-        min-height: 32px;
-        line-height: 32px;
+        max-width: 100%;
         font-size: 14px;
+        font-weight: 600;
+        @include truncate;
+      }
+      /* 가운데 칸: 킥오프 시각이 이 카드의 주인공이다. */
+      > span {
+        @include numeric;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+      > span + p {
+        font-size: 12px;
+        font-weight: 500;
+        color: $muted;
       }
     }
   }

@@ -1,25 +1,27 @@
+@use "../../../../../styles/variable.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .teamPageSkeleton {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   row-gap: 16px;
-  padding-bottom: 20px;
-  box-sizing: border-box;
 }
 
 /* TeamDetail.module.scss 의 matchSection 과 같은 2열 그리드 */
 .matchSection {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  @media (max-width: $mobile) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .card {
-  @include skeleton-card(16px 24px 20px);
+  @include skeleton-card(20px);
   display: flex;
   flex-direction: column;
   row-gap: 12px;

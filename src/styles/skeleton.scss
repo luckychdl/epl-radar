@@ -9,7 +9,7 @@
   position: relative;
   overflow: hidden;
   border-radius: $radius;
-  background-color: rgba(240, 240, 240, 1);
+  background-color: #e9ecf2;
   &::after {
     content: "";
     position: absolute;
@@ -18,22 +18,26 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.75),
       transparent
     );
     animation: skeletonShimmer 1.4s infinite;
   }
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      animation: none;
+    }
+  }
 }
 
-/** 실제 카드(위젯)와 같은 테두리·그림자를 써서 로딩 전후로 틀이 흔들리지 않게 한다. */
-@mixin skeleton-card($padding: 16px 24px) {
+/** 실제 패널(mixins.scss 의 panel)과 같은 테두리를 써서 로딩 전후로 틀이 흔들리지 않게 한다. */
+@mixin skeleton-card($padding: 20px) {
   width: 100%;
   box-sizing: border-box;
   padding: $padding;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: $surface;
+  border: 1px solid $line;
+  border-radius: $radius-panel;
 }
 
 @keyframes skeletonShimmer {

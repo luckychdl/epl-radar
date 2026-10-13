@@ -2,11 +2,11 @@ import LeagueListSkeleton from "../LeagueListSkeleton/LeagueListSkeleton";
 import TodayMatchesSkeleton from "../TodayMatchesSkeleton/TodayMatchesSkeleton";
 import styles from "./MainPageSkeleton.module.scss";
 
-/** 홈과 같은 3열 그리드. 섹션 스켈레톤은 Suspense fallback 과 같은 것을 쓴다. */
+/** 홈과 같은 2열 그리드. 섹션 스켈레톤은 Suspense fallback 과 같은 것을 쓴다. */
 export default function MainPageSkeleton() {
   return (
     <div className={styles.main}>
-      <div>
+      <div className={styles.rail}>
         <LeagueListSkeleton />
       </div>
       <div className={styles.todayMatches}>
@@ -15,7 +15,6 @@ export default function MainPageSkeleton() {
         </div>
         <TodayMatchesSkeleton />
       </div>
-      <div />
     </div>
   );
 }

@@ -1,43 +1,52 @@
-@use "../../../../styles/variable.scss" as *;
+@use "../../../../styles/mixins.scss" as *;
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
-  height: 84px;
+  height: $header-height;
+  background-color: $ink;
+  > div {
+    max-width: $page-width;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    column-gap: 40px;
+    @media (max-width: $mobile) {
+      padding: 0 12px;
+      column-gap: 20px;
+    }
+  }
+}
+
+.wordmark {
+  flex: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  column-gap: 60px;
-  background-color: $bg-white;
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid rgba(245, 245, 245, 1);
-  > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    column-gap: 16px;
-    > p {
-      font-size: 32px;
-      color: $text-color;
-      font-weight: 600;
-    }
+  column-gap: 8px;
+  color: $surface;
+  > svg {
+    fill: none;
+    stroke: #7d93ff;
+    stroke-width: 2;
+    stroke-linecap: round;
   }
-  > nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    column-gap: 32px;
-    a {
-      font-size: 24px;
-      color: $text-sub-color;
-      &:hover {
-        color: $text-color;
-        scale: 1.1;
-        transition: all 0.3s ease;
-      }
+  > span {
+    font-family: $font-display;
+    font-size: 19px;
+    font-weight: 800;
+    font-stretch: 82%;
+    letter-spacing: 0.01em;
+    > em {
+      margin-left: 4px;
+      font-style: normal;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.62);
     }
   }
 }

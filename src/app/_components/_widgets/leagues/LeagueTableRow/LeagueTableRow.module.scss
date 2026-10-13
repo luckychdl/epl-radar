@@ -1,20 +1,32 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
+
 .leagueTableRow {
   width: 100%;
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1/-1;
-  min-height: 36px;
-  height: 36px;
+  height: 44px;
+  transition: background-color 0.15s;
+  & + & {
+    border-top: 1px solid $line;
+  }
   &:hover {
-    background-color: rgba(245, 245, 245, 1);
+    background-color: $sunken;
   }
   > span {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    @include numeric;
     font-size: 14px;
+    color: $ink-soft;
+    /* 마지막 숫자 열이 승점이다. 순위를 정하는 값이라 혼자 굵게 둔다. */
+    &:last-of-type {
+      font-size: 15px;
+      font-weight: 700;
+      color: $ink;
+    }
   }
   .rank {
     height: 100%;
@@ -23,38 +35,51 @@
     align-items: center;
     justify-content: flex-start;
     > p {
-      height: 80%;
+      flex: none;
+      width: 3px;
+      height: 20px;
+      border-radius: 0 3px 3px 0;
       &.ucl {
-        border-left: 2px solid #2ad572;
+        background-color: $accent;
       }
       &.uel {
-        border-left: 2px solid #0046a7;
+        background-color: #f08c00;
       }
       &.uecl {
-        border-left: 2px solid #0eccf0;
+        background-color: #12b5a6;
       }
       &.relegation {
-        border-left: 2px solid #ff4646;
+        background-color: $loss;
       }
     }
     > span {
-      padding-inline-start: 24px;
+      padding-inline-start: 17px;
+      @include numeric;
+      font-size: 13px;
+      font-weight: 600;
+      color: $muted;
     }
   }
   .teamName {
+    min-width: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 16px;
-
-    &:hover {
-      > span {
-        text-decoration: underline;
-      }
+    gap: 10px;
+    > img {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
     }
     > span {
       font-size: 14px;
+      font-weight: 600;
+      @include truncate;
+    }
+    &:hover > span {
+      color: $accent;
     }
   }
   .leagueMatchResult {
@@ -62,12 +87,15 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 4px;
   }
   .nextMatch {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    > img {
+      object-fit: contain;
+    }
   }
 }

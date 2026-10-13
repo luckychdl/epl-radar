@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./error.module.scss";
 
 interface Props {
   error: Error & { digest?: string };
@@ -16,7 +17,7 @@ export default function Error({ error, reset }: Props) {
   }, [error]);
 
   return (
-    <div style={{ padding: 24 }}>
+    <div className={styles.error}>
       <h2>Something went wrong.</h2>
       <p>{error.message}</p>
       <button
@@ -24,13 +25,6 @@ export default function Error({ error, reset }: Props) {
         onClick={() => {
           router.refresh();
           reset();
-        }}
-        style={{
-          border: "1px solid #000",
-          padding: "10px 20px",
-          borderRadius: 12,
-          marginTop: 10,
-          background: "#fff",
         }}
       >
         Retry

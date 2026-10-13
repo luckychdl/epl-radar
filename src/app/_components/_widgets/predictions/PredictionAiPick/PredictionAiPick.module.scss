@@ -1,7 +1,5 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
-
-$ai-color: #5a4bd6;
 
 .predictionAiPick {
   display: flex;
@@ -9,18 +7,17 @@ $ai-color: #5a4bd6;
   row-gap: 10px;
   min-width: 0;
   > h4 {
-    margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 6px;
     font-size: 12px;
-    font-weight: bold;
-    color: $ai-color;
+    font-weight: 700;
+    color: $ai;
     > small {
-      font-size: 10px;
-      font-weight: normal;
-      color: $text-sub-color;
+      font-size: 11px;
+      font-weight: 400;
+      color: $muted;
     }
   }
 }
@@ -32,8 +29,10 @@ $ai-color: #5a4bd6;
   align-items: center;
   gap: 8px;
   > strong {
-    font-size: 20px;
-    color: $text-color;
+    @include numeric;
+    font-size: 22px;
+    line-height: 1.1;
+    color: $ink;
   }
 }
 
@@ -47,19 +46,19 @@ $ai-color: #5a4bd6;
   > span {
     display: block;
     flex-basis: 0;
-    opacity: 0.45;
+    opacity: 0.4;
     &.favored {
       opacity: 1;
     }
   }
   .home {
-    background-color: $primary-color;
+    background-color: $ink;
   }
   .draw {
-    background-color: #b8b8c4;
+    background-color: $faint;
   }
   .away {
-    background-color: $ai-color;
+    background-color: $ai;
   }
 }
 
@@ -76,7 +75,7 @@ $ai-color: #5a4bd6;
     flex-direction: column;
     min-width: 0;
     font-size: 11px;
-    color: $text-sub-color;
+    color: $muted;
     &:nth-child(2) {
       align-items: center;
     }
@@ -85,26 +84,24 @@ $ai-color: #5a4bd6;
     }
     > span {
       max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      @include truncate;
     }
     > em {
       font-style: normal;
       font-size: 13px;
+      font-variant-numeric: tabular-nums;
     }
     &.favored {
-      color: $text-color;
-      font-weight: bold;
+      color: $ink;
+      font-weight: 700;
     }
   }
 }
 
 .reason {
-  margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: #4a4a4a;
+  color: $ink-soft;
 }
 
 .trigger {
@@ -114,14 +111,14 @@ $ai-color: #5a4bd6;
   align-items: center;
   column-gap: 6px;
   padding: 8px 12px;
-  box-sizing: border-box;
-  border-radius: 999px;
-  background-color: rgba(245, 245, 250, 1);
-  border: 1px solid rgba(232, 232, 244, 1);
+  border-radius: $radius-pill;
+  background-color: $ai-soft;
   font-size: 12px;
-  color: $ai-color;
+  font-weight: 600;
+  color: $ai;
+  transition: background-color 0.15s;
   &:hover {
-    background-color: rgba(234, 234, 244, 1);
+    background-color: $ai-soft-hover;
   }
 }
 
@@ -148,19 +145,18 @@ $ai-color: #5a4bd6;
   align-items: flex-start;
   row-gap: 8px;
   > p {
-    margin: 0;
     font-size: 12px;
-    color: $text-sub-color;
+    color: $muted;
   }
   > button {
     padding: 6px 12px;
-    box-sizing: border-box;
-    border-radius: 999px;
-    background-color: rgba(234, 234, 244, 1);
+    border-radius: $radius-pill;
+    background-color: $ai-soft;
     font-size: 12px;
-    color: $ai-color;
+    font-weight: 600;
+    color: $ai;
     &:hover {
-      background-color: rgba(222, 222, 238, 1);
+      background-color: $ai-soft-hover;
     }
   }
 }

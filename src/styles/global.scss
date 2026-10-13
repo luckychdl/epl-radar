@@ -1,76 +1,69 @@
 @use "./variable.scss" as *;
-@font-face {
-  font-family: "GmarketSansMedium";
-  src:
-    url("/fonts/GmarketSansMedium.woff2") format("woff2"),
-    url("/fonts/GmarketSansTTFMedium.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "GmarketSansBold";
-  src:
-    url("/fonts/GmarketSansBold.woff2") format("woff2"),
-    url("/fonts/GmarketSansTTFBold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "GmarketSansLight";
-  src:
-    url("/fonts/GmarketSansLight.woff2") format("woff2"),
-    url("/fonts/GmarketSansTTFLight.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
 html {
-  width: 100%;
-  height: 100dvh;
-  padding: 0;
-  margin: 0;
-  background-color: $bg-main;
-  box-sizing: border-box;
-  font-family: "GmarketSansMedium", sans-serif;
-  -webkit-font-smoothing: antialiased; /* Mac에서 부드러운 렌더링 */
-  -moz-osx-font-smoothing: grayscale; /* Mac에서 그레이스케일 렌더링 */
+  background-color: $canvas;
+  font-family: $font-body;
+  color: $ink;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
 }
+
 body {
-  width: 100%;
-  height: 100dvh;
-  box-sizing: border-box;
-  background-color: $bg-main;
-  border-radius: 16px;
+  min-height: 100dvh;
   margin: 0;
+  background-color: $canvas;
+  font-size: 14px;
+  line-height: 1.45;
+  /* 한글은 어절 단위로 끊어야 읽힌다. 긴 URL 같은 예외만 강제로 접는다. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
   > main {
     width: 100%;
-    height: calc(100% - 84px);
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 1280px) 1fr;
-    box-sizing: border-box;
-    padding: 20px 0;
+    max-width: $page-width;
+    margin: 0 auto;
+    padding: 24px 20px 72px;
+    @media (max-width: $mobile) {
+      padding: 16px 12px 56px;
+    }
   }
 }
 
-a {
-  color: $text-color;
-  text-decoration: none;
-  &:visited {
-    color: $text-color;
-    text-decoration: none;
-  }
-}
+h1,
+h2,
+h3,
+h4,
 p {
   margin: 0;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 button {
   background-color: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   margin: 0;
-  &:hover {
-    opacity: 0.8;
+  font: inherit;
+  color: inherit;
+}
+
+a,
+button,
+[tabindex] {
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }

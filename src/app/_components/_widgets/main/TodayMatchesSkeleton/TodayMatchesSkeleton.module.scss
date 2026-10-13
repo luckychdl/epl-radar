@@ -1,31 +1,32 @@
+@use "../../../../../styles/variable.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
+/* 위쪽 여백은 MatchUpdateStatus 한 줄(28px) 자리다. 데이터가 와도 목록이 내려가지 않는다. */
 .todayMatchesSkeleton {
   width: 100%;
+  padding-top: 28px;
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
   > section {
-    @include skeleton-card(0 0 8px);
+    @include skeleton-card(0);
+    margin-top: 12px;
     overflow: hidden;
     > header {
       width: 100%;
-      min-height: 48px;
-      box-sizing: border-box;
+      min-height: 44px;
       padding: 0 16px;
       display: flex;
       flex-direction: row;
       align-items: center;
-      column-gap: 12px;
-      background-color: rgba(245, 245, 245, 1);
+      column-gap: 10px;
     }
   }
 }
 
 .emblem {
   flex: none;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   @include skeleton-shimmer(999px);
 }
 
@@ -36,9 +37,9 @@
 }
 
 .row {
-  min-height: 56px;
-  box-sizing: border-box;
+  min-height: 60px;
   padding: 0 16px;
+  border-top: 1px solid $line;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,13 +50,19 @@
 .team {
   flex: 1;
   max-width: 180px;
-  height: 20px;
+  height: 18px;
   @include skeleton-shimmer;
+  &:first-child {
+    margin-left: auto;
+  }
+  &:last-child {
+    margin-right: auto;
+  }
 }
 
 .time {
   flex: none;
-  width: 48px;
-  height: 20px;
+  width: 56px;
+  height: 26px;
   @include skeleton-shimmer;
 }

@@ -1,3 +1,5 @@
+@use "../../../../../styles/mixins.scss" as *;
+
 .tooltipWrap {
   position: relative;
   display: inline-flex;
@@ -23,10 +25,11 @@
   padding: 8px 10px;
   border-radius: 8px;
 
-  background: #111827;
-  color: #fff;
+  background: $ink;
+  color: $surface;
 
   font-size: 12px;
+  font-weight: 500;
   line-height: 1.4;
   white-space: nowrap;
 
@@ -45,6 +48,6 @@
 
     border-width: 6px;
     border-style: solid;
-    border-color: #111827 transparent transparent transparent;
+    border-color: $ink transparent transparent transparent;
   }
 }

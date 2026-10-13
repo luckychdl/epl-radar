@@ -1,4 +1,4 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .predictionMatchList {
@@ -8,51 +8,37 @@
 }
 
 .dayCard {
-  width: 100%;
+  @include panel;
   display: flex;
   flex-direction: column;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  overflow: hidden;
   > h4 {
-    margin: 0;
-    min-height: 48px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     padding: 0 16px;
-    box-sizing: border-box;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    background-color: rgba(245, 245, 245, 1);
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
   }
 }
 
 .empty {
-  padding: 32px 16px;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 13px;
-  color: $text-sub-color;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
+  @include panel;
+  @include empty-text;
 }
 
-/* TodayMatchRow 의 헤더(48px)·행(56px) 높이와 맞춘다. */
+/* TodayMatchRow 의 헤더(44px)·행(60px) 높이와 맞춘다. */
 .skeletonHeader {
   display: block;
-  height: 48px;
-  @include skeleton-shimmer(0);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  width: 120px;
+  height: 14px;
+  margin: 15px 16px;
+  @include skeleton-shimmer;
 }
 
 .skeletonRow {
   display: block;
-  height: 40px;
+  height: 44px;
   margin: 8px 16px;
   @include skeleton-shimmer(8px);
 }

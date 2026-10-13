@@ -1,24 +1,24 @@
-@use "../../styles/variable.scss" as *;
+@use "../../styles/mixins.scss" as *;
 
 .budget {
   width: 100%;
+  max-width: $reading-width;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  padding: 0 16px 20px;
-  box-sizing: border-box;
+  row-gap: 20px;
   > header {
     display: flex;
     flex-direction: column;
     row-gap: 6px;
     > h2 {
-      margin: 0;
-      font-size: 24px;
+      @include page-title;
     }
     > p {
-      font-size: 12px;
+      max-width: 64ch;
+      font-size: 13px;
       line-height: 1.6;
-      color: $text-sub-color;
+      color: $muted;
     }
   }
 }

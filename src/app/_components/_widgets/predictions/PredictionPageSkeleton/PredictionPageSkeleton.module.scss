@@ -1,42 +1,38 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .summary {
   display: block;
   height: 164px;
-  @include skeleton-shimmer(16px);
+  @include skeleton-shimmer($radius-panel);
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 10px;
   > h3 {
-    margin: 0;
-    font-size: 16px;
+    @include panel-title;
   }
 }
 
 .dayCard {
+  @include panel;
   display: flex;
   flex-direction: column;
-  background-color: $bg-white;
-  border: 1px solid rgba(240, 240, 240, 1);
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .dayHeader {
   display: block;
-  height: 48px;
-  @include skeleton-shimmer(0);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  width: 120px;
+  height: 14px;
+  margin: 15px 16px;
+  @include skeleton-shimmer;
 }
 
 .row {
   display: block;
-  height: 40px;
+  height: 44px;
   margin: 8px 16px;
   @include skeleton-shimmer(8px);
 }
@@ -44,5 +40,5 @@
 .history {
   display: block;
   height: 72px;
-  @include skeleton-shimmer(16px);
+  @include skeleton-shimmer($radius-panel);
 }

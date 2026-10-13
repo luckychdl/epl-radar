@@ -1,55 +1,42 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
+
 .leagueHeader {
-  width: 100%;
-  background-color: $bg-white;
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(240, 240, 240, 1);
-  box-sizing: border-box;
+  @include panel;
   > header {
     min-height: 112px;
-    padding: 12px 32px 8px;
-    box-sizing: border-box;
+    padding: 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
     gap: 16px;
+    > img {
+      flex: none;
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
     > div {
+      min-width: 0;
       margin-right: auto;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      justify-content: flex-start;
+      row-gap: 2px;
       > span {
-        font-size: 24px;
-        font-weight: bold;
+        @include page-title;
       }
       > p {
-        font-size: 16px;
-        color: $text-sub-color;
+        font-size: 13px;
+        color: $muted;
       }
     }
   }
   > nav {
-    padding: 0 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 40px;
-    > a {
-      min-height: 64px;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-      color: #717171;
-      &.current {
-        border-bottom: 3px solid $text-color;
-        color: $text-color;
-        font-weight: bold;
-      }
+    padding: 0 24px;
+    border-top: 1px solid $line;
+    @include underline-tabs;
+    > a.current {
+      @include underline-tab-current;
     }
   }
 }

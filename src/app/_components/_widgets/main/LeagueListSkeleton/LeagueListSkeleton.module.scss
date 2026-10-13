@@ -1,31 +1,32 @@
 @use "../../../../../styles/skeleton.scss" as *;
 
 .leagueListSkeleton {
-  @include skeleton-card(16px 24px 6px);
+  @include skeleton-card(8px);
   display: flex;
   flex-direction: column;
 }
 
 .title {
-  width: 88px;
-  height: 20px;
-  margin-bottom: 12px;
+  width: 64px;
+  height: 14px;
+  margin: 12px 12px 10px;
   @include skeleton-shimmer;
 }
 
 .row {
   min-height: 40px;
+  padding: 0 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 16px;
+  column-gap: 12px;
 }
 
 .emblem {
   flex: none;
   width: 24px;
   height: 24px;
-  @include skeleton-shimmer(999px);
+  @include skeleton-shimmer(6px);
 }
 
 .name {

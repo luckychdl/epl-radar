@@ -1,40 +1,47 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 
 .seasonSelect {
   width: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   > a {
+    height: 34px;
+    padding: 0 14px;
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 6px;
-    padding: 8px 14px;
-    box-sizing: border-box;
-    border-radius: 999px;
-    background-color: $bg-white;
-    border: 1px solid rgba(240, 240, 240, 1);
+    border-radius: $radius-pill;
+    background-color: $surface;
+    border: 1px solid $line;
     font-size: 13px;
-    color: $text-sub-color;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: $muted;
+    transition:
+      border-color 0.15s,
+      color 0.15s;
     > em {
-      font-size: 10px;
+      font-size: 11px;
       font-style: normal;
-      /* 흰 배경에서 $accent-color 는 대비가 너무 낮다. */
-      color: #00794c;
+      font-weight: 600;
+      color: $accent;
     }
     &:hover {
-      border-color: rgba(210, 210, 210, 1);
+      border-color: $line-strong;
+      color: $ink;
     }
   }
   > a.current {
-    background-color: $primary-color;
-    border-color: $primary-color;
-    color: $bg-white;
+    background-color: $ink;
+    border-color: $ink;
+    color: $surface;
+    font-weight: 600;
     > em {
-      color: $accent-color;
+      /* 짙은 바탕에서는 $accent 의 대비가 모자라 밝은 단계로 올린다. */
+      color: #9db0ff;
     }
   }
 }

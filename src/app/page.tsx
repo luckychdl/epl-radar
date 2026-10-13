@@ -18,7 +18,7 @@ export default async function HomePage({ searchParams }: Props) {
 
   return (
     <div className={styles.main}>
-      <div>
+      <div className={styles.rail}>
         {/* 섹션별로 끊어 스트리밍한다. 한쪽 응답이 늦어도 다른 쪽이 먼저 그려진다. */}
         <Suspense fallback={<LeagueListSkeleton />}>
           <LeagueListSection />
@@ -30,7 +30,6 @@ export default async function HomePage({ searchParams }: Props) {
           <TodayMatchesSection date={dateParam} />
         </Suspense>
       </div>
-      <div />
     </div>
   );
 }

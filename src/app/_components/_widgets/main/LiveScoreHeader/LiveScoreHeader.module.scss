@@ -1,4 +1,5 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
+
 .liveScoreHeader {
   width: 100%;
   display: flex;
@@ -6,27 +7,31 @@
   align-items: center;
   justify-content: space-between;
   > button {
+    height: 36px;
+    padding: 0 12px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 8px;
+    border-radius: $radius-control;
+    color: $muted;
+    transition:
+      background-color 0.15s,
+      color 0.15s;
+    &:hover {
+      background-color: $sunken;
+      color: $ink;
+    }
     > span {
-      font-size: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: $ink;
     }
   }
   .arrow {
-    width: 30px;
-    height: 30px;
-    background-color: #eaeaea;
-    border-radius: 50%;
-    transition:
-      background-color 0.3s,
-      color 0.3s;
-
-    &:hover {
-      background-color: #000000;
-      color: $bg-white;
-    }
+    width: 36px;
+    padding: 0;
   }
 }

@@ -1,46 +1,46 @@
+@use "../../../../../styles/variable.scss" as *;
 @use "../../../../../styles/skeleton.scss" as *;
 
 .leaguePageSkeleton {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 16px;
-  padding-bottom: 20px;
-  box-sizing: border-box;
 }
 
 .seasons {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 6px;
   > span {
     width: 96px;
-    height: 35px;
-    @include skeleton-shimmer(999px);
+    height: 34px;
+    @include skeleton-shimmer($radius-pill);
   }
 }
 
 .table {
-  @include skeleton-card(8px 0 16px);
+  @include skeleton-card(0);
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
   > div {
     width: 100%;
-    min-height: 40px;
-    box-sizing: border-box;
-    padding: 0 16px;
+    min-height: 44px;
+    padding: 0 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     column-gap: 12px;
+    & + div {
+      border-top: 1px solid $line;
+    }
   }
 }
 
 .chart,
 .scorers {
-  @include skeleton-card(16px 24px 20px);
+  @include skeleton-card(20px);
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -75,8 +75,8 @@
 
 .crest {
   flex: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   @include skeleton-shimmer(999px);
 }
 

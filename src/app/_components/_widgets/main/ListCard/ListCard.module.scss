@@ -1,38 +1,50 @@
-@use "../../../../../styles/variable.scss" as *;
+@use "../../../../../styles/mixins.scss" as *;
 
 .listCard {
-  background-color: $bg-white;
-  border-radius: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  @include panel(8px);
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(240, 240, 240, 1);
-  padding-bottom: 6px;
   > h4 {
-    margin: 0;
-    padding: 0 0 12px;
-    box-sizing: border-box;
-    padding: 16px 24px;
+    padding: 10px 12px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $muted;
   }
   > a {
-    width: 100%;
     min-height: 40px;
-    color: $text-color;
-    text-decoration: none;
-    padding: 0 24px;
+    padding: 0 12px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
-    gap: 16px;
-    transition: background-color 0.3s;
-
+    gap: 12px;
+    border-radius: $radius-control;
+    transition: background-color 0.15s;
     &:hover {
-      background-color: #eaeaea;
+      background-color: $sunken;
+    }
+    > img {
+      flex: none;
+      object-fit: contain;
     }
     > p {
       font-size: 14px;
+      font-weight: 500;
+      @include truncate;
+    }
+  }
+
+  /* 좁은 화면에서는 세로 목록이 경기 목록을 밀어내므로 가로로 넘겨 본다. */
+  @media (max-width: $mobile) {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+    > h4 {
+      flex: none;
+      padding: 0 8px 0 12px;
+    }
+    > a {
+      flex: none;
     }
   }
 }
