@@ -23,3 +23,9 @@ export const API_DATE_FORMAT = "yyyy-MM-dd";
  * 서버 캐시 주기보다 짧게 잡으면 같은 캐시를 다시 받을 뿐이라 낭비다.
  */
 export const MATCH_POLLING_INTERVAL_MS = REVALIDATE.live * 1000;
+
+/**
+ * "오늘"을 자르는 기준 시간대(KST, UTC+9).
+ * 서버 시간대에 맡기면 배포 환경(UTC)과 로컬에서 하루의 경계가 달라진다.
+ */
+export const SERVICE_UTC_OFFSET_HOURS = 9;

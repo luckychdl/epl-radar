@@ -169,10 +169,15 @@ function resolve(pathname, searchParams) {
   }
 
   if (pathname === "/matches") {
-    const wide = searchParams.get("dateTo") !== searchParams.get("dateFrom");
-    const matches = wide
-      ? [...FINISHED_MATCHES, ...TODAY_MATCHES, ...SCHEDULED_MATCHES]
-      : TODAY_MATCHES;
+    // 홈은 하루(시간대 보정으로 UTC 이틀)만, My Teams·Predictions 는 10일 창을 요청한다.
+    const spanDays =
+      (Date.parse(searchParams.get("dateTo")) - Date.parse(searchParams.get("dateFrom"))) /
+      86_400_000;
+    // 홈은 킥오프 시각으로 오늘 경기만 남기므로, 고정 날짜 대신 지금 시각을 넣어야 걸러지지 않는다.
+    const matches =
+      spanDays > 2
+        ? [...FINISHED_MATCHES, ...TODAY_MATCHES, ...SCHEDULED_MATCHES]
+        : TODAY_MATCHES.map((item) => ({ ...item, utcDate: new Date().toISOString() }));
 
     return { filters: {}, resultSet: { count: matches.length }, matches };
   }
