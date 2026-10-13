@@ -1,0 +1,24 @@
+@use "../../../../../styles/mixins.scss" as *;
+@use "../../../../../styles/skeleton.scss" as *;
+
+.matchPrediction {
+  width: 100%;
+  min-height: 132px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 16px;
+  border-radius: 12px;
+  background-color: $sunken;
+  text-align: left;
+  @media (max-width: 600px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.skeleton {
+  display: block;
+  height: 102px;
+  @include skeleton-shimmer(8px);
+}

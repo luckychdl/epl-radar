@@ -1,0 +1,60 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.remainingDifficulty {
+  @include panel(20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  > header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      @include panel-title;
+    }
+    > strong {
+      font-size: 13px;
+      font-weight: 700;
+    }
+  }
+  > p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: $muted;
+  }
+}
+
+.meter {
+  width: 100%;
+  height: 8px;
+  border-radius: $radius-pill;
+  background-color: $draw-soft;
+  overflow: hidden;
+  > span {
+    display: block;
+    height: 100%;
+    border-radius: $radius-pill;
+  }
+}
+
+/* 라벨은 글자색만, 막대는 배경색만 쓴다. 한 클래스에 둘 다 주면 라벨이 안 보인다. */
+.hardText {
+  color: $loss;
+}
+.normalText {
+  color: $warn;
+}
+.easyText {
+  color: $win;
+}
+
+.hardBar {
+  background-color: $loss;
+}
+.normalBar {
+  background-color: $warn;
+}
+.easyBar {
+  background-color: $win;
+}

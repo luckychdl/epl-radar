@@ -1,0 +1,64 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.todayMatches {
+  @include panel;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.todayMatchHeader,
+.myMatchesHeader {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: $ink;
+}
+
+.todayMatchHeader {
+  justify-content: space-between;
+  padding: 0 12px 0 16px;
+  transition: background-color 0.15s;
+  &:hover {
+    background-color: $sunken;
+  }
+  > div {
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    > img {
+      flex: none;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    > span {
+      @include truncate;
+    }
+  }
+  > svg {
+    flex: none;
+    color: $faint;
+  }
+}
+
+.myMatchesHeader {
+  column-gap: 8px;
+  padding: 0 16px;
+  > svg {
+    color: $star;
+    fill: currentColor;
+  }
+}
+
+.noMatches {
+  @include empty-text;
+  padding: 20px 16px;
+  border-top: 1px solid $line;
+}

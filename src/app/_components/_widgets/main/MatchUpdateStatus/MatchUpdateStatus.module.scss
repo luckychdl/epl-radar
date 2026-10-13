@@ -1,0 +1,52 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.matchUpdateStatus {
+  width: 100%;
+  min-height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 4px;
+  > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: $muted;
+  }
+  .active {
+    color: $win;
+    font-weight: 600;
+  }
+  .notice {
+    position: relative;
+    cursor: help;
+    > em {
+      position: absolute;
+      right: 0;
+      bottom: 100%;
+      z-index: 10;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background-color: $ink;
+      color: $surface;
+      font-size: 12px;
+      font-style: normal;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.15s,
+        visibility 0.15s;
+    }
+    &:hover > em,
+    &:focus-visible > em {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

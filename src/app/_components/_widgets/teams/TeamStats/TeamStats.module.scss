@@ -1,0 +1,91 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.teamStats {
+  @include panel(20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+  > section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    > h3 {
+      @include panel-title;
+    }
+  }
+}
+
+.summary {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 6px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 4px;
+    padding: 12px 14px;
+    border-radius: $radius-control;
+    background-color: $sunken;
+    > dt {
+      font-size: 12px;
+      color: $muted;
+    }
+    > dd {
+      margin: 0;
+      @include numeric;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+  }
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 4px;
+    padding: 12px 14px;
+    border-radius: $radius-control;
+    background-color: $sunken;
+    > strong {
+      font-size: 12px;
+      color: $muted;
+      font-weight: 400;
+    }
+    > p {
+      font-size: 15px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    > span {
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      color: $muted;
+    }
+    > .empty {
+      color: $muted;
+      font-weight: 400;
+      font-size: 13px;
+    }
+  }
+}
+
+.empty {
+  color: $muted;
+  font-size: 13px;
+}
+
+.notice {
+  font-size: 12px;
+  line-height: 1.6;
+  color: $muted;
+}

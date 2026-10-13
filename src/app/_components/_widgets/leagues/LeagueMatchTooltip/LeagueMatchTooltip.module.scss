@@ -1,0 +1,53 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.tooltipWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -8px);
+  }
+}
+
+.badge {
+  cursor: default;
+}
+
+.tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  z-index: 20;
+
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  background: $ink;
+  color: $surface;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 0);
+  transition: 0.15s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-width: 6px;
+    border-style: solid;
+    border-color: $ink transparent transparent transparent;
+  }
+}

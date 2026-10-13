@@ -1,0 +1,101 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.teamMatchList {
+  @include panel(20px 20px 8px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  > section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    > h3 {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      column-gap: 8px;
+      @include panel-title;
+      > em {
+        font-size: 12px;
+        color: $muted;
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+    > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      > li {
+        min-height: 48px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 12px;
+        border-bottom: 1px solid $line;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+.date {
+  flex: 0 0 52px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: $muted;
+}
+
+.venue {
+  flex: 0 0 32px;
+  font-size: 12px;
+  color: $muted;
+}
+
+.opponent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+  > img {
+    flex: none;
+    object-fit: contain;
+  }
+  > span {
+    font-size: 14px;
+    font-weight: 500;
+    @include truncate;
+  }
+}
+
+.score {
+  flex: 0 0 56px;
+  text-align: right;
+  @include numeric;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.kickOff {
+  flex: 0 0 56px;
+  text-align: right;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: $muted;
+}
+
+.win {
+  color: $win;
+}
+.draw {
+  color: $draw;
+}
+.lose {
+  color: $loss;
+}

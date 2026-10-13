@@ -1,0 +1,117 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.budgetPanel {
+  @include panel(20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.headline {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background-color: $sunken;
+    > dt {
+      font-size: 12px;
+      color: $muted;
+    }
+    > dd {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      column-gap: 4px;
+      @include numeric;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      > em {
+        font-family: $font-body;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        color: $muted;
+      }
+    }
+  }
+}
+
+.meter {
+  width: 100%;
+  height: 6px;
+  border-radius: $radius-pill;
+  background-color: $line;
+  overflow: hidden;
+  > span {
+    display: block;
+    height: 100%;
+    border-radius: $radius-pill;
+    background-color: $win;
+  }
+}
+
+.overBar {
+  background-color: $loss !important;
+}
+
+.over {
+  color: $loss;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  th,
+  td {
+    padding: 10px 8px;
+    border-bottom: 1px solid $line;
+    text-align: right;
+    font-weight: 400;
+  }
+  thead th {
+    color: $muted;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  th:first-child,
+  tbody th {
+    padding-left: 0;
+    text-align: left;
+    word-break: break-all;
+  }
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+  }
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.empty {
+  @include empty-text;
+}
+
+.notice {
+  font-size: 12px;
+  line-height: 1.7;
+  color: $muted;
+  > code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background-color: $draw-soft;
+    font-size: 11px;
+    color: $ink-soft;
+  }
+}

@@ -1,0 +1,82 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.teamInfo {
+  @include panel(20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  > header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      @include panel-title;
+    }
+    > a {
+      font-size: 12px;
+      font-weight: 500;
+      color: $accent;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  > dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    > div {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      column-gap: 12px;
+      font-size: 13px;
+      > dt {
+        flex: 0 0 88px;
+        color: $muted;
+      }
+      > dd {
+        margin: 0;
+        flex: 1;
+        min-width: 0;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.competitions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid $line;
+  > strong {
+    font-size: 13px;
+    color: $muted;
+    font-weight: 400;
+  }
+  > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    > li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      column-gap: 6px;
+      padding: 6px 12px;
+      border-radius: $radius-pill;
+      background-color: $sunken;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}

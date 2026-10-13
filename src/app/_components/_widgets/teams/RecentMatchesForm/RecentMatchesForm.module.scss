@@ -1,0 +1,100 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.recentMatchesForm {
+  @include panel(20px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @include panel-title;
+  }
+}
+
+.streak {
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: $radius-pill;
+  background-color: $accent-soft;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: $accent;
+}
+
+.summary {
+  font-size: 12px;
+  color: $muted;
+}
+
+.matches {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 8px;
+}
+
+.match {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+  > span {
+    padding: 3px 8px;
+    border-radius: 8px;
+    background-color: $draw-soft;
+    @include numeric;
+    font-size: 15px;
+    font-weight: 700;
+    color: $ink;
+    white-space: nowrap;
+  }
+  > img {
+    object-fit: contain;
+  }
+  > .date,
+  > .opponentName {
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    font-family: $font-body;
+    font-size: 11px;
+    font-weight: 400;
+    color: $muted;
+  }
+  > .opponentName {
+    max-width: 100%;
+    @include truncate;
+  }
+  > .win {
+    background-color: $win-soft;
+    color: $win;
+  }
+  > .lose {
+    background-color: $loss-soft;
+    color: $loss;
+  }
+  > .draw {
+    background-color: $draw-soft;
+    color: $draw;
+  }
+}
+
+.empty {
+  @include empty-text;
+}

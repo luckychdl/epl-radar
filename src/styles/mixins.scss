@@ -1,0 +1,91 @@
+@forward "./variable.scss";
+@use "./variable.scss" as *;
+
+/** 화면의 기본 면. 그림자 대신 얇은 선으로만 구분한다. */
+@mixin panel($padding: 0) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: $padding;
+  background-color: $surface;
+  border: 1px solid $line;
+  border-radius: $radius-panel;
+}
+
+@mixin panel-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: $ink;
+}
+
+@mixin page-title {
+  margin: 0;
+  font-family: $font-display;
+  font-size: 28px;
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: $ink;
+}
+
+/** 자릿수가 바뀌어도 열이 흔들리지 않게 고정폭 숫자를 쓴다. */
+@mixin numeric($stretch: 88%) {
+  font-family: $font-display;
+  font-stretch: $stretch;
+  font-variant-numeric: tabular-nums;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/** 리그·팀 상세 헤더가 공유하는 밑줄 탭. */
+@mixin underline-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 28px;
+  overflow-x: auto;
+  > a {
+    position: relative;
+    flex: none;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: $muted;
+    transition: color 0.15s;
+    &:hover {
+      color: $ink;
+    }
+  }
+}
+
+@mixin underline-tab-current {
+  color: $ink;
+  font-weight: 700;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background-color: $accent;
+  }
+}
+
+@mixin empty-text {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: $muted;
+}

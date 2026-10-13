@@ -1,0 +1,26 @@
+@use "../styles/mixins.scss" as *;
+
+.main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  @media (max-width: $mobile) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+.rail {
+  position: sticky;
+  top: $header-height + 24px;
+  min-width: 0;
+  @media (max-width: $mobile) {
+    position: static;
+  }
+}
+
+.todayMatches {
+  min-width: 0;
+}

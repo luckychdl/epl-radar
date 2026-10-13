@@ -1,0 +1,26 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.predictionGradeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: $radius-pill;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.exact {
+  background-color: $win-soft;
+  color: $win;
+}
+
+.outcome {
+  background-color: $accent-soft;
+  color: $accent;
+}
+
+.miss {
+  background-color: $draw-soft;
+  color: $muted;
+}

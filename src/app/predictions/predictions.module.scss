@@ -1,0 +1,33 @@
+@use "../../styles/mixins.scss" as *;
+
+.predictions {
+  width: 100%;
+  max-width: $reading-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 28px;
+  > header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    > h2 {
+      @include page-title;
+    }
+    > p {
+      max-width: 64ch;
+      font-size: 13px;
+      line-height: 1.6;
+      color: $muted;
+    }
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  > h3 {
+    @include panel-title;
+  }
+}

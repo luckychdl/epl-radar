@@ -1,0 +1,39 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.headerNav {
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  column-gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  > a {
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.62);
+    transition: color 0.15s;
+    &:hover {
+      color: $surface;
+    }
+    &.current {
+      color: $surface;
+      font-weight: 600;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 0;
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        background-color: #7d93ff;
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.predictionUserPick {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  min-width: 0;
+  > h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: $accent;
+  }
+}
+
+.steppers {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+
+.stepper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 8px;
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 8px;
+    > strong {
+      min-width: 18px;
+      text-align: center;
+      @include numeric;
+      font-size: 18px;
+    }
+    > button {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $line-strong;
+      border-radius: 8px;
+      background-color: $surface;
+      color: $ink;
+      transition: border-color 0.15s;
+      &:hover:not(:disabled) {
+        border-color: $ink;
+      }
+      &:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 500;
+  @include truncate;
+}
+
+.saved {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  > strong {
+    @include numeric;
+    font-size: 22px;
+    line-height: 1.1;
+    color: $ink;
+  }
+}
+
+.hint,
+.none {
+  font-size: 12px;
+  color: $muted;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 6px;
+  > button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: $surface;
+    box-shadow: inset 0 0 0 1px $line-strong;
+    color: $ink;
+    transition:
+      background-color 0.15s,
+      box-shadow 0.15s;
+    &:hover {
+      box-shadow: inset 0 0 0 1px $ink;
+    }
+  }
+  > .primary {
+    background-color: $ink;
+    box-shadow: none;
+    color: $surface;
+    &:hover {
+      background-color: $ink-soft;
+      box-shadow: none;
+    }
+  }
+  > .subtle {
+    background-color: transparent;
+    box-shadow: none;
+    color: $muted;
+    &:hover {
+      box-shadow: none;
+      color: $ink;
+    }
+  }
+}

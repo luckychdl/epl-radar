@@ -1,0 +1,44 @@
+@use "../../../../../styles/mixins.scss" as *;
+@use "../../../../../styles/skeleton.scss" as *;
+
+.summary {
+  display: block;
+  height: 164px;
+  @include skeleton-shimmer($radius-panel);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  > h3 {
+    @include panel-title;
+  }
+}
+
+.dayCard {
+  @include panel;
+  display: flex;
+  flex-direction: column;
+}
+
+.dayHeader {
+  display: block;
+  width: 120px;
+  height: 14px;
+  margin: 15px 16px;
+  @include skeleton-shimmer;
+}
+
+.row {
+  display: block;
+  height: 44px;
+  margin: 8px 16px;
+  @include skeleton-shimmer(8px);
+}
+
+.history {
+  display: block;
+  height: 72px;
+  @include skeleton-shimmer($radius-panel);
+}

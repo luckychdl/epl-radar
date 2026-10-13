@@ -1,0 +1,32 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.leagueTable {
+  @include panel;
+  /* 열이 11개라 좁은 화면에서는 줄이지 않고 가로로 넘긴다. 줄이면 숫자가 겹친다. */
+  overflow-x: auto;
+  > div {
+    width: 100%;
+    min-width: 800px;
+    display: grid;
+    grid-template-columns:
+      [position] 48px
+      [Team] minmax(140px, 1fr)
+      [PL] 32px
+      [W] 32px
+      [D] 32px
+      [L] 32px
+      [plusMin] 56px
+      [GD] 40px
+      [PTS] 44px
+      [Form] 150px
+      [Next] 56px;
+    column-gap: 10px;
+
+    > div {
+      width: 100%;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1/-1;
+    }
+  }
+}

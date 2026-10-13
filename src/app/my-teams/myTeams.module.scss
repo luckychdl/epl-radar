@@ -1,0 +1,14 @@
+@use "../../styles/mixins.scss" as *;
+
+.myTeams {
+  width: 100%;
+  max-width: $reading-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 20px;
+  > h2 {
+    @include page-title;
+  }
+}

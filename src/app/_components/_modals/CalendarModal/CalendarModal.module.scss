@@ -1,0 +1,115 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.modal {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 20px;
+  background: $surface;
+  color: $ink;
+  box-shadow: 0 24px 64px rgba(11, 16, 32, 0.28);
+}
+
+.calendar {
+  width: 100%;
+}
+
+.caption {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  margin-bottom: 12px;
+}
+
+.captionLabel {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nav {
+  position: absolute;
+  inset: 16px 16px auto;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.navButton {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-control;
+  color: $ink-soft;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s;
+  &:hover {
+    background-color: $sunken;
+  }
+}
+
+.month {
+  width: 100%;
+}
+
+.monthGrid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.weekdays,
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  padding: 8px 0;
+  text-align: center;
+  color: $muted;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
+}
+
+.dayButton {
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-control;
+  color: $ink;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s;
+  &:hover {
+    background: $sunken;
+  }
+}
+
+.today .dayButton {
+  color: $accent;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px $accent;
+}
+
+.selected .dayButton {
+  background: $ink;
+  color: $surface;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.outside .dayButton {
+  color: $faint;
+}

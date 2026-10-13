@@ -1,0 +1,125 @@
+@use "../../../../../styles/mixins.scss" as *;
+@use "../../../../../styles/skeleton.scss" as *;
+
+.predictionHistory {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.row {
+  @include panel(12px 20px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 10px;
+  @media (max-width: 600px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.fixture {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  min-width: 0;
+  > em {
+    font-size: 11px;
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    color: $muted;
+  }
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 6px;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    @include truncate;
+    &:first-child {
+      justify-content: flex-end;
+    }
+  }
+  > strong {
+    @include numeric;
+    font-size: 15px;
+    &.pending {
+      font-family: $font-body;
+      font-size: 12px;
+      font-weight: 400;
+      color: $muted;
+    }
+  }
+}
+
+.picks {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+
+.pick {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+  > strong {
+    @include numeric;
+    font-size: 15px;
+  }
+}
+
+.pickLabel {
+  width: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: $muted;
+}
+
+.none {
+  font-size: 12px;
+  color: $muted;
+}
+
+.empty {
+  @include panel(40px 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+  text-align: center;
+  > p {
+    font-size: 13px;
+    color: $muted;
+  }
+  a {
+    color: $accent;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* 실제 행(카드 + 두 줄)과 같은 높이로 맞춘다. */
+.skeleton {
+  height: 72px;
+  @include skeleton-shimmer($radius-panel);
+}

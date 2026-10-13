@@ -1,0 +1,42 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.leagueHeader {
+  @include panel;
+  > header {
+    min-height: 112px;
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    > img {
+      flex: none;
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+    > div {
+      min-width: 0;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 2px;
+      > span {
+        @include page-title;
+      }
+      > p {
+        font-size: 13px;
+        color: $muted;
+      }
+    }
+  }
+  > nav {
+    padding: 0 24px;
+    border-top: 1px solid $line;
+    @include underline-tabs;
+    > a.current {
+      @include underline-tab-current;
+    }
+  }
+}
